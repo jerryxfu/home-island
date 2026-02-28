@@ -1,8 +1,6 @@
 const SCHEDULER_URL_PREFIX = "https://jerryxf.net";
 // const SCHEDULER_URL_PREFIX = "http://localhost:5173";
 
-let raphdf201 = "201";
-
 /** @type {any} */
 let chrome;
 /** @type {any} */
@@ -307,6 +305,11 @@ function updateClock() {
 
     $clock.textContent = `${hours}:${minutesStr}:${secondsStr}`;
 
+    // In focus mode, show time in the greeting/title position
+    if (isFocusMode) {
+        $greeting.textContent = `${hours}:${minutesStr}:${secondsStr}`;
+    }
+
     const options = {
         weekday: "long",
         year: "numeric",
@@ -320,6 +323,9 @@ function updateClock() {
 // Greeting
 // ================================
 function updateGreeting() {
+    // In focus mode, the greeting element shows the time — skip greeting updates
+    if (isFocusMode) return;
+
     const hour = demoMode ? Math.floor(demoHour) : new Date().getHours();
 
     let greeting;
@@ -384,6 +390,7 @@ function initSearch() {
 let isUndocked = false;
 let autoUndockTimeout = null;
 let autoUndockDelay = 0;
+let isFocusMode = false;
 
 function initKeyboardShortcuts() {
     document.addEventListener("keydown", (e) => {
@@ -566,7 +573,7 @@ function startDemoMode() {
 // Quick Links / Shortcuts
 // ================================
 function getFaviconUrl(url, customFavicon) {
-    if (customFavicon && customFaicon.trim()) {
+    if (customFavicon && customFavicon.trim()) {
         return customFavicon.trim();
     }
     try {
@@ -635,6 +642,57 @@ function loadShortcuts() {
 
 
 // ================================
+// Focus Mode
+// ================================
+function toggleFocusMode() {
+    isFocusMode = !isFocusMode;
+    document.body.classList.toggle("focus-mode", isFocusMode);
+
+    if (isFocusMode) {
+        // Show time in the greeting position
+        updateClock();
+    } else {
+        // Restore the greeting text
+        updateGreeting();
+    }
+
+    // Persist focus mode state
+    if (chrome?.storage) {
+        chrome.storage.local.set({focusMode: isFocusMode});
+    } else if (browser?.storage) {
+        browser.storage.local.set({focusMode: isFocusMode});
+    } else {
+        localStorage.setItem("focusMode", String(isFocusMode));
+    }
+}
+
+function loadFocusModeSetting() {
+    if (chrome?.storage) {
+        chrome.storage.local.get(["focusMode"], (result) => {
+            if (result.focusMode === true || result.focusMode === "true") {
+                isFocusMode = true;
+                document.body.classList.add("focus-mode");
+                updateClock();
+            }
+        });
+    } else if (browser?.storage) {
+        browser.storage.local.get(["focusMode"]).then((result) => {
+            if (result.focusMode === true || result.focusMode === "true") {
+                isFocusMode = true;
+                document.body.classList.add("focus-mode");
+                updateClock();
+            }
+        });
+    } else {
+        if (localStorage.getItem("focusMode") === "true") {
+            isFocusMode = true;
+            document.body.classList.add("focus-mode");
+            updateClock();
+        }
+    }
+}
+
+// ================================
 // Init
 // ================================
 function init() {
@@ -660,6 +718,13 @@ function init() {
     loadDemoModeSetting();
     initScheduler();
     loadShortcuts();
+    loadFocusModeSetting();
+
+    // Focus mode toggle button
+    const focusToggle = document.getElementById("focus-toggle");
+    if (focusToggle) {
+        focusToggle.addEventListener("click", toggleFocusMode);
+    }
 
     requestAnimationFrame(() => {
         document.body.classList.add("transitions-ready");

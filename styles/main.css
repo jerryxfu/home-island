@@ -364,3 +364,18 @@ body.undocked .scheduler-container {
     filter: blur(8px);
     opacity: 0.7;
 }
+
+/* ================================
+   Focus Mode
+   ================================ */
+body.focus-mode .hero_time {
+    display: none;
+}
+
+body.focus-mode .quick-links-section {
+    display: none;
+}
+
+body.focus-mode .scheduler-container {
+    display: none !important;
+}
