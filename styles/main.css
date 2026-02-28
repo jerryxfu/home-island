@@ -31,9 +31,21 @@ body {
     overflow: hidden;
 }
 
-/* Transitions only apply after page has loaded */
-body.transitions-ready,
-body.transitions-ready * {
+/*
+ * PERF FIX: Replaced the wildcard rule:
+ *   body.transitions-ready, body.transitions-ready * { transition: color 2s }
+ * That forced transition eligibility checks on EVERY descendant (including
+ * 135+ star divs and every other element). Now we only target the handful
+ * of elements whose color actually transitions between day/night modes.
+ */
+body.transitions-ready .hero_title,
+body.transitions-ready .hero_time,
+body.transitions-ready .hero_date,
+body.transitions-ready .hero_glowing-separator,
+body.transitions-ready .search-input,
+body.transitions-ready .search-icon,
+body.transitions-ready .quick-link,
+body.transitions-ready .footer-text {
     transition: color 2s ease-in-out;
 }
 
@@ -80,10 +92,9 @@ body.transitions-ready * {
     width: 210px;
     height: 2px;
     background: var(--hero-glow-c);
-    box-shadow:
-        inset 0 0 8px 4px var(--hero-glow-c),
-        0 0 8px 4px var(--hero-glow-c),
-        0 0 16px 8px var(--hero-glow-c);
+    box-shadow: inset 0 0 8px 4px var(--hero-glow-c),
+    0 0 8px 4px var(--hero-glow-c),
+    0 0 16px 8px var(--hero-glow-c);
     border-radius: 2px;
     align-self: flex-start;
 }
@@ -189,18 +200,6 @@ body.transitions-ready * {
     color: var(--text-c);
 }
 
-body.transitions-ready .search-icon {
-    transition: color 2s ease-in-out;
-}
-
-/*.section-title {*/
-/*    text-align: left;*/
-/*    font-size: 0.875rem;*/
-/*    opacity: 0.6;*/
-/*    margin-bottom: 1rem;*/
-/*    transition: color 2s ease-in-out;*/
-/*}*/
-
 .quick-links-section {
     width: 100%;
     max-width: 702px;
@@ -221,19 +220,13 @@ body.transitions-ready .search-icon {
     flex-direction: row;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.35rem 0.8rem;
+    padding: 0.35rem 0.80rem;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 0.5rem;
     text-decoration: none;
     color: inherit;
-    transition: all 0.2s ease;
-}
-
-body.transitions-enabled .quick-link {
-    transition:
-        all 0.2s ease,
-        color 2s ease-in-out;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .quick-link:hover {
@@ -267,9 +260,10 @@ body.transitions-enabled .quick-link {
     bottom: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 0.75rem;
     z-index: 1;
 }
 
@@ -278,8 +272,17 @@ body.transitions-enabled .quick-link {
     opacity: 0.3;
 }
 
+.quick-settings {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
 .footer-settings-button {
-    margin-left: auto;
     background: none;
     border: none;
     cursor: pointer;
@@ -299,10 +302,7 @@ body.undocked .hero {
     transform: scale(0.94);
     filter: blur(8px);
     opacity: 0.7;
-    transition:
-        transform 0.45s ease,
-        filter 0.45s ease,
-        opacity 0.45s ease;
+    transition: transform 0.45s ease, filter 0.45s ease, opacity 0.45s ease;
 }
 
 body.undocked::before {
@@ -320,10 +320,7 @@ body:not(.undocked) .hero {
     transform: scale(1);
     filter: none;
     opacity: 1;
-    transition:
-        transform 0.35s ease,
-        filter 0.35s ease,
-        opacity 0.35s ease;
+    transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
 }
 
 @keyframes fadeIn {
@@ -349,10 +346,7 @@ body:not(.undocked) .hero {
     overflow: hidden;
     z-index: 50;
     background: transparent;
-    transition:
-        transform 0.4s ease,
-        filter 0.4s ease,
-        opacity 0.4s ease;
+    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
 }
 
 .scheduler-container.hidden {

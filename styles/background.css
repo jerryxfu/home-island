@@ -7,22 +7,9 @@
     height: 100vh;
     z-index: -1;
     transition: background 6s ease-in-out;
-    background-size: 150% 150%;
-    animation: gradient-shift 30s ease-in-out infinite;
+    /*
+     * Performance fix: Removed the infinite gradient-shift keyframe animation.
+     * main.js already updates the background gradient every 30s based on
+     * real time so the CSS animation was fighting it and adding compositor work.
+     */
 }
-
-@keyframes gradient-shift {
-    0%, 100% {
-        background-position: 50% 50%;
-    }
-    25% {
-        background-position: 45% 55%;
-    }
-    50% {
-        background-position: 55% 45%;
-    }
-    75% {
-        background-position: 50% 50%;
-    }
-}
-

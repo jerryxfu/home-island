@@ -1,6 +1,8 @@
 const SCHEDULER_URL_PREFIX = "https://jerryxf.net";
 // const SCHEDULER_URL_PREFIX = "http://localhost:5173";
 
+let raphdf201 = "201";
+
 /** @type {any} */
 let chrome;
 /** @type {any} */
@@ -39,9 +41,16 @@ const TIME_COLORS = [
     {hour: 24, colors: ["#050508", "#08080d", "#0b0b12", "#0e0e15", "#101018", "#12121a"]},
 ];
 
+// ================================
+// Cached DOM references (avoid getElementById on every tick)
+// ================================
+let $background = null;
+let $clock = null;
+let $date = null;
+let $greeting = null;
+
 // Get current time as decimal hours (0-24)
 function getDecimalHour() {
-    // If in demo mode, return demoHour instead
     if (demoMode) return demoHour;
 
     const now = new Date();
@@ -58,7 +67,6 @@ function lerpColor(hex1, hex2, t) {
 
 // Get interpolated colors for current time
 function getColorsForTime(hour) {
-    // Find the two keyframes we're between
     let before = TIME_COLORS[0], after = TIME_COLORS[1];
     for (let i = 0; i < TIME_COLORS.length - 1; i++) {
         if (hour >= TIME_COLORS[i].hour && hour < TIME_COLORS[i + 1].hour) {
@@ -68,41 +76,34 @@ function getColorsForTime(hour) {
         }
     }
 
-    // Calculate interpolation factor [0-1] between keyframes
     const t = (hour - before.hour) / (after.hour - before.hour);
-
-    // Interpolate each color in the palette
     return before.colors.map((color, i) => lerpColor(color, after.colors[i], t));
 }
 
 // Get star opacity based on time
 function getStarOpacity(hour) {
-    if (hour >= 21 || hour < 5) return 1;           // full stars
-    if (hour >= 20 && hour < 21) return hour - 20;  // fade in 8-9pm
-    if (hour >= 5 && hour < 6) return 6 - hour;     // fade out 5-6am
+    if (hour >= 21 || hour < 5) return 1;
+    if (hour >= 20 && hour < 21) return hour - 20;
+    if (hour >= 5 && hour < 6) return 6 - hour;
     return 0;
 }
 
 function updateBackground() {
     const hour = getDecimalHour();
-    const background = document.getElementById("dynamic-background");
-    const starsContainer = document.getElementById("stars-container");
 
-    // Get interpolated colors and apply gradient
     const colors = getColorsForTime(hour);
-    background.style.background = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${(i / (colors.length - 1)) * 100}%`).join(", ")})`;
-    background.style.backgroundSize = "150% 150%";
+    $background.style.background = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${(i / (colors.length - 1)) * 100}%`).join(", ")})`;
+    $background.style.backgroundSize = "150% 150%";
 
-    // Smooth star opacity
-    starsContainer.style.opacity = getStarOpacity(hour);
+    // Update star opacity — the canvas render loop reads this each frame
+    starsOpacity = getStarOpacity(hour);
 
-    // Update text color based on day/night
     updateTextColor(hour);
 }
 
 // Toggle text between light and dark based on time
 function updateTextColor(hour) {
-    const isDarkTime = hour >= 19 || hour < 5; // 7pm-6am -> light text, 6am-7pm -> dark text
+    const isDarkTime = hour >= 19 || hour < 5;
 
     if (isDarkTime) {
         document.documentElement.classList.add("dark-mode");
@@ -114,21 +115,50 @@ function updateTextColor(hour) {
 }
 
 // ================================
-// Stars
+// Stars — Canvas-based (replaces 135 animated DOM elements with 1 canvas)
+//
+// WHY: Each DOM star had its own CSS animation running `opacity` + `transform`
+// + `box-shadow` repaints. The profiler showed 124+ "twinkle" animation tracks
+// all competing for compositor time. A single <canvas> with rAF is dramatically
+// cheaper and also skips rendering entirely during daytime (zero CPU).
 // ================================
+/** @type {HTMLCanvasElement} */
+let starsCanvas = null;
+/** @type {CanvasRenderingContext2D} */
+let starsCtx = null;
+let starsData = [];
+let shootingStarsData = [];
+let starsOpacity = 0;
+let starsAnimId = null;
+let lastStarsTime = 0;
+
 function createStars() {
-    const starsContainer = document.getElementById("stars-container");
-    starsContainer.innerHTML = ""; // Clear existing stars
+    const container = document.getElementById("stars-container");
+    container.innerHTML = "";
 
-    const starCount = 135; // Number of stars
-    const sizes = ["small", "medium", "large"];
-    const weights = [0.7, 0.25, 0.05]; // Probability weights for sizes
+    starsCanvas = document.createElement("canvas");
+    starsCanvas.id = "stars-canvas";
+    container.appendChild(starsCanvas);
+    starsCtx = starsCanvas.getContext("2d");
 
+    resizeStarsCanvas();
+
+    // Debounce resize to avoid excessive canvas re-allocations
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resizeStarsCanvas, 150);
+    });
+
+    // Generate star data (pure data objects, no DOM elements)
+    const starCount = 135;
+    const sizeRadii = [0.5, 1, 1.5];
+    const glowRadii = [2, 4, 6];
+    const glowAlphas = [0.3, 0.4, 0.5];
+    const weights = [0.7, 0.25, 0.05];
+
+    starsData = [];
     for (let i = 0; i < starCount; i++) {
-        const star = document.createElement("div");
-        star.classList.add("star");
-
-        // Weighted random size selection
         const rand = Math.random();
         let sizeIndex = 0;
         let cumulative = 0;
@@ -139,36 +169,120 @@ function createStars() {
                 break;
             }
         }
-        star.classList.add(sizes[sizeIndex]);
 
-        // Random position
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-
-        // Random twinkle animation timing
-        star.style.setProperty("--twinkle-duration", `${2 + Math.random() * 4}s`);
-        star.style.setProperty("--twinkle-delay", `${Math.random() * 5}s`);
-
-        starsContainer.appendChild(star);
+        starsData.push({
+            x: Math.random(),
+            y: Math.random(),
+            radius: sizeRadii[sizeIndex],
+            glowRadius: glowRadii[sizeIndex],
+            glowAlpha: glowAlphas[sizeIndex],
+            phase: Math.random() * Math.PI * 2,
+            speed: 2 + Math.random() * 4,
+        });
     }
 
-    // Add occasional shooting stars
-    createShootingStars();
+    // Shooting star data
+    shootingStarsData = [];
+    for (let i = 0; i < 3; i++) {
+        shootingStarsData.push({
+            x: 0.1 + Math.random() * 0.6,
+            y: Math.random() * 0.4,
+            delay: 5 + Math.random() * 20,
+            period: 15 + Math.random() * 15,
+            angle: 30 * (Math.PI / 180),
+            length: 150,
+        });
+    }
+
+    lastStarsTime = performance.now();
+    if (starsAnimId) cancelAnimationFrame(starsAnimId);
+    starsAnimLoop();
 }
 
-function createShootingStars() {
-    const starsContainer = document.getElementById("stars-container");
-    const shootingStarCount = 3;
+function resizeStarsCanvas() {
+    if (!starsCanvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    starsCanvas.width = window.innerWidth * dpr;
+    starsCanvas.height = window.innerHeight * dpr;
+    starsCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
 
-    for (let i = 0; i < shootingStarCount; i++) {
-        const shootingStar = document.createElement("div");
-        shootingStar.classList.add("shooting-star");
-        shootingStar.style.left = `${10 + Math.random() * 60}%`;
-        shootingStar.style.top = `${Math.random() * 40}%`;
-        shootingStar.style.animationDelay = `${5 + Math.random() * 20}s`;
-        shootingStar.style.animationDuration = `${15 + Math.random() * 15}s`;
-        starsContainer.appendChild(shootingStar);
+function starsAnimLoop() {
+    starsAnimId = requestAnimationFrame(starsAnimLoop);
+
+    // Zero CPU cost during daytime — skip entirely when stars aren't visible
+    if (starsOpacity <= 0) return;
+
+    const now = performance.now();
+    const elapsed = now - lastStarsTime;
+
+    // Throttle to ~30 fps — twinkling stars don't need 60
+    if (elapsed < 33) return;
+    lastStarsTime = now;
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const ctx = starsCtx;
+    const timeSec = now / 1000;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw stars
+    for (let i = 0; i < starsData.length; i++) {
+        const s = starsData[i];
+        // Sine-wave twinkle: opacity oscillates 0.3 → 1.0 (matches old CSS keyframes)
+        const twinkle = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(timeSec * (Math.PI * 2 / s.speed) + s.phase));
+        const scale = 1 + 0.2 * (twinkle - 0.3) / 0.7;
+
+        const px = s.x * w;
+        const py = s.y * h;
+        const r = s.radius * scale;
+
+        // Glow (cheap radial fill — replaces expensive CSS box-shadow)
+        ctx.globalAlpha = starsOpacity * twinkle * s.glowAlpha;
+        ctx.beginPath();
+        ctx.arc(px, py, s.glowRadius * scale, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.5)";
+        ctx.fill();
+
+        // Core dot
+        ctx.globalAlpha = starsOpacity * twinkle;
+        ctx.beginPath();
+        ctx.arc(px, py, r, 0, Math.PI * 2);
+        ctx.fillStyle = "#fff";
+        ctx.fill();
     }
+
+    // Shooting stars
+    for (let i = 0; i < shootingStarsData.length; i++) {
+        const ss = shootingStarsData[i];
+        const cycleTime = (timeSec - ss.delay) % ss.period;
+        if (cycleTime < 0) continue;
+        const visibleWindow = ss.period * 0.15;
+        if (cycleTime > visibleWindow) continue;
+
+        const progress = cycleTime / visibleWindow;
+        const opacity = progress < 0.33 ? progress / 0.33 : (1 - progress);
+        if (opacity <= 0) continue;
+
+        const px = ss.x * w + Math.cos(ss.angle) * 300 * progress;
+        const py = ss.y * h + Math.sin(ss.angle) * 173 * progress;
+        const tailX = px - Math.cos(ss.angle) * ss.length;
+        const tailY = py - Math.sin(ss.angle) * ss.length * 0.577;
+
+        ctx.globalAlpha = starsOpacity * Math.max(0, opacity);
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(px, py);
+        const grad = ctx.createLinearGradient(tailX, tailY, px, py);
+        grad.addColorStop(0, "rgba(255,255,255,0)");
+        grad.addColorStop(1, "rgba(255,255,255,1)");
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+
+    ctx.globalAlpha = 1;
 }
 
 // ================================
@@ -176,10 +290,7 @@ function createShootingStars() {
 // ================================
 function updateClock() {
     const now = new Date();
-    const clockElement = document.getElementById("clock");
-    const dateElement = document.getElementById("date");
 
-    // Use demo time if in demo mode
     let hours, minutes, seconds;
     if (demoMode) {
         hours = Math.floor(demoHour);
@@ -194,24 +305,21 @@ function updateClock() {
     const minutesStr = minutes.toString().padStart(2, "0");
     const secondsStr = seconds.toString().padStart(2, "0");
 
-    clockElement.textContent = `${hours}:${minutesStr}:${secondsStr}`;
+    $clock.textContent = `${hours}:${minutesStr}:${secondsStr}`;
 
-    // Format date
     const options = {
         weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric"
     };
-    dateElement.textContent = now.toLocaleDateString("en-US", options);
+    $date.textContent = now.toLocaleDateString("en-US", options);
 }
 
 // ================================
 // Greeting
 // ================================
 function updateGreeting() {
-    const greetingElement = document.getElementById("greeting");
-    // Use demo time if in demo mode
     const hour = demoMode ? Math.floor(demoHour) : new Date().getHours();
 
     let greeting;
@@ -228,30 +336,17 @@ function updateGreeting() {
         greeting = "Good Night";
     }
 
-    // Load username from storage and append if exists
     if (typeof chrome !== "undefined" && chrome.storage) {
         chrome.storage.local.get(["userName"], (result) => {
-            if (result.userName) {
-                greetingElement.textContent = `${greeting}, ${result.userName}`;
-            } else {
-                greetingElement.textContent = greeting;
-            }
+            $greeting.textContent = result.userName ? `${greeting}, ${result.userName}` : greeting;
         });
     } else if (typeof browser !== "undefined" && browser.storage) {
         browser.storage.local.get(["userName"]).then((result) => {
-            if (result.userName) {
-                greetingElement.textContent = `${greeting}, ${result.userName}`;
-            } else {
-                greetingElement.textContent = greeting;
-            }
+            $greeting.textContent = result.userName ? `${greeting}, ${result.userName}` : greeting;
         });
     } else {
         const userName = localStorage.getItem("userName");
-        if (userName) {
-            greetingElement.textContent = `${greeting}, ${userName}`;
-        } else {
-            greetingElement.textContent = greeting;
-        }
+        $greeting.textContent = userName ? `${greeting}, ${userName}` : greeting;
     }
 }
 
@@ -262,32 +357,21 @@ function initSearch() {
     const searchForm = document.getElementById("search-form");
     const searchInput = document.getElementById("q");
 
-    // Focus search input on page load
     if (searchInput) {
         searchInput.focus();
     }
 
-    // Handle search form submission using Chrome Search API
     if (searchForm) {
         searchForm.addEventListener("submit", (e) => {
             e.preventDefault();
             const query = searchInput?.value?.trim();
             if (!query) return;
 
-            // Use Chrome Search API to respect user's default search engine
             if (typeof chrome !== "undefined" && chrome.search && chrome.search.query) {
-                chrome.search.query({
-                    text: query,
-                    disposition: "CURRENT_TAB"
-                });
+                chrome.search.query({text: query, disposition: "CURRENT_TAB"});
             } else if (typeof browser !== "undefined" && browser.search && browser.search.query) {
-                // Firefox compatibility
-                browser.search.query({
-                    text: query,
-                    disposition: "CURRENT_TAB"
-                });
+                browser.search.query({text: query, disposition: "CURRENT_TAB"});
             } else {
-                // Fallback for local testing - open in omnibox style
                 window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
             }
         });
@@ -299,14 +383,12 @@ function initSearch() {
 // ================================
 let isUndocked = false;
 let autoUndockTimeout = null;
-let autoUndockDelay = 0; // ms, 0 = disabled
+let autoUndockDelay = 0;
 
 function initKeyboardShortcuts() {
     document.addEventListener("keydown", (e) => {
-        // List of modifier keys to ignore
         const modifierKeys = ["Control", "Alt", "Meta", "Tab"];
 
-        // Escape to undock/blur the screen
         if (e.key === "Escape") {
             e.preventDefault();
             if (!isUndocked) {
@@ -317,26 +399,22 @@ function initKeyboardShortcuts() {
             return;
         }
 
-        // Dock back if on any key press (except modifier keys)
         if (isUndocked && !modifierKeys.includes(e.key)) {
             e.preventDefault();
             dockScreen();
             return;
         }
 
-        // Reset auto-undock timer on any key press (except modifier keys)
         if (!modifierKeys.includes(e.key)) {
             resetAutoUndockTimer();
         }
 
-        // Focus search on pressing "/" key
         if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
             e.preventDefault();
             document.getElementById("q").focus();
         }
     });
 
-    // Click anywhere while undocked to dock back, reset timer otherwise
     document.addEventListener("click", () => {
         if (isUndocked) {
             dockScreen();
@@ -345,14 +423,12 @@ function initKeyboardShortcuts() {
         }
     });
 
-    // Reset timer on mouse movement
     document.addEventListener("mousemove", () => {
         if (!isUndocked) {
             resetAutoUndockTimer();
         }
     });
 
-    // Load auto-undock setting and start timer
     loadAutoUndockSetting();
 }
 
@@ -402,8 +478,9 @@ function dockScreen() {
 // ================================
 let demoMode = false;
 let demoHour = 0;
-let demoUpdatesPerSecond = 30; // How many times to update per second
-let demoHoursPerUpdate = 0.04; // How many hours to advance each update (0.01 = 36 seconds of simulated time)
+let demoUpdatesPerSecond = 30;
+let demoHoursPerUpdate = 0.04;
+let demoIntervalId = null; // Track interval to prevent leaks
 
 // ================================
 // Scheduler
@@ -449,32 +526,35 @@ function toggleDemoMode() {
         startDemoMode();
     } else {
         console.log("⏸️ Demo mode OFF - Using real time");
+        if (demoIntervalId) {
+            clearInterval(demoIntervalId);
+            demoIntervalId = null;
+        }
     }
 }
 
 function startDemoMode() {
     if (!demoMode) return;
 
-    // Calculate interval in milliseconds
+    // Clear any existing interval first (prevents stacking)
+    if (demoIntervalId) {
+        clearInterval(demoIntervalId);
+    }
+
     const intervalMs = 1000 / demoUpdatesPerSecond;
 
-    // Advance time at specified rate
-    setInterval(() => {
+    demoIntervalId = setInterval(() => {
         if (!demoMode) return;
 
         demoHour += demoHoursPerUpdate;
-        if (demoHour >= 24) demoHour = 0; // Loop back to midnight
+        if (demoHour >= 24) demoHour = 0;
 
-        // Update with demo time
         const colors = getColorsForTime(demoHour);
-        const background = document.getElementById("dynamic-background");
-        const starsContainer = document.getElementById("stars-container");
 
-        background.style.background = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${(i / (colors.length - 1)) * 100}%`).join(", ")})`;
-        starsContainer.style.opacity = getStarOpacity(demoHour);
+        $background.style.background = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${(i / (colors.length - 1)) * 100}%`).join(", ")})`;
+        starsOpacity = getStarOpacity(demoHour);
         updateTextColor(demoHour);
 
-        // Update clock and greeting with demo time
         updateClock();
         updateGreeting();
 
@@ -486,10 +566,9 @@ function startDemoMode() {
 // Quick Links / Shortcuts
 // ================================
 function getFaviconUrl(url, customFavicon) {
-    if (customFavicon && customFavicon.trim()) {
+    if (customFavicon && customFaicon.trim()) {
         return customFavicon.trim();
     }
-    // Extract domain from URL for favicon.im
     try {
         const urlObj = new URL(url);
         return `https://favicon.im/${urlObj.host}`;
@@ -502,7 +581,8 @@ function renderShortcuts(shortcuts) {
     const container = document.getElementById("quick-links");
     if (!container) return;
 
-    container.innerHTML = "";
+    // Build in a DocumentFragment - single DOM reflow instead of N
+    const fragment = document.createDocumentFragment();
 
     shortcuts.forEach(shortcut => {
         if (!shortcut.name || !shortcut.url) return;
@@ -519,6 +599,7 @@ function renderShortcuts(shortcuts) {
         img.src = faviconUrl;
         img.alt = `${shortcut.name} icon`;
         img.className = "quick-link-favicon";
+        img.loading = "lazy";
         iconSpan.appendChild(img);
 
         const textSpan = document.createElement("span");
@@ -527,9 +608,11 @@ function renderShortcuts(shortcuts) {
 
         link.appendChild(iconSpan);
         link.appendChild(textSpan);
-
-        container.appendChild(link);
+        fragment.appendChild(link);
     });
+
+    container.innerHTML = "";
+    container.appendChild(fragment);
 }
 
 function loadShortcuts() {
@@ -555,38 +638,29 @@ function loadShortcuts() {
 // Init
 // ================================
 function init() {
-    // Initialize dynamic background
+    // Cache DOM references once at startup
+    $background = document.getElementById("dynamic-background");
+    $clock = document.getElementById("clock");
+    $date = document.getElementById("date");
+    $greeting = document.getElementById("greeting");
+
     createStars();
     updateBackground();
 
-    // Update background every 30 seconds for smooth real-time transitions
     setInterval(updateBackground, 30000);
 
-    // Update clock immediately and then every second
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Update greeting
     updateGreeting();
-    // Update greeting every minute in case time period changes
     setInterval(updateGreeting, 60000);
 
-    // Initialize search
     initSearch();
-
-    // Initialize keyboard shortcuts
     initKeyboardShortcuts();
-
-    // Load demo mode setting from storage
     loadDemoModeSetting();
-
-    // Initialize scheduler
     initScheduler();
-
-    // Load custom shortcuts
     loadShortcuts();
 
-    // Enable color transitions after initial render
     requestAnimationFrame(() => {
         document.body.classList.add("transitions-ready");
     });
@@ -594,7 +668,6 @@ function init() {
     console.log("🏝️ Home Island loaded successfully!");
 }
 
-// Load demo mode setting from storage
 function loadDemoModeSetting() {
     if (chrome?.storage) {
         chrome.storage.local.get(["demoMode"], (result) => {
@@ -616,5 +689,4 @@ function loadDemoModeSetting() {
     }
 }
 
-// Run initialization when DOM is ready
 document.addEventListener("DOMContentLoaded", init);
