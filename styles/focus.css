@@ -1,0 +1,11 @@
+body.focus-mode .hero_time {
+    display: none;
+}
+
+body.focus-mode .quick-links-section {
+    display: none;
+}
+
+body.focus-mode .scheduler-container {
+    display: none !important;
+}

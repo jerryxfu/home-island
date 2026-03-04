@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Home Island",
-    "version": "1.2.0",
+    "version": "1.2.5",
     "description": "A beautiful, minimalist browser extension that transforms your new tab page into a dynamic home island",
     "author": "Jerry",
     "browser_specific_settings": {

@@ -1,11 +1,6 @@
 const SCHEDULER_URL_PREFIX = "https://jerryxf.net";
 // const SCHEDULER_URL_PREFIX = "http://localhost:5173";
 
-/** @type {any} */
-let chrome;
-/** @type {any} */
-let browser;
-
 // Default shortcuts
 const DEFAULT_SHORTCUTS = [
     {name: "Outlook", url: "https://outlook.live.com", favicon: ""},
@@ -528,11 +523,11 @@ function toggleDemoMode() {
     demoMode = !demoMode;
     if (demoMode) {
         demoHour = getDecimalHour();
-        console.log(`🎬 Demo mode ON - ${demoUpdatesPerSecond} updates/sec, ${demoHoursPerUpdate} hours/update`);
+        console.log(`Demo mode ON - ${demoUpdatesPerSecond} updates/sec, ${demoHoursPerUpdate} hours/update`);
         console.log(`   (${(demoHoursPerUpdate * demoUpdatesPerSecond * 60).toFixed(1)} simulated minutes per real second)`);
         startDemoMode();
     } else {
-        console.log("⏸️ Demo mode OFF - Using real time");
+        console.log("Demo mode OFF, using real time");
         if (demoIntervalId) {
             clearInterval(demoIntervalId);
             demoIntervalId = null;
@@ -564,8 +559,6 @@ function startDemoMode() {
 
         updateClock();
         updateGreeting();
-
-        console.log(`⏰ Demo time: ${Math.floor(demoHour)}:${Math.floor((demoHour % 1) * 60).toString().padStart(2, "0")}`);
     }, intervalMs);
 }
 
@@ -693,6 +686,32 @@ function loadFocusModeSetting() {
 }
 
 // ================================
+// Version Display
+// ================================
+function loadVersion() {
+    const versionSpan = document.getElementById("version");
+    if (!versionSpan) return;
+
+    if (chrome?.runtime?.getManifest) {
+        const manifest = chrome.runtime.getManifest();
+        versionSpan.textContent = `v${manifest.version}`;
+    } else if (browser?.runtime?.getManifest) {
+        const manifest = browser.runtime.getManifest();
+        versionSpan.textContent = `v${manifest.version}`;
+    } else {
+        // Fallback: fetch manifest.json directly
+        fetch("manifest.json")
+        .then(res => res.json())
+        .then(manifest => {
+            versionSpan.textContent = `v${manifest.version}`;
+        })
+        .catch(() => {
+            versionSpan.textContent = "";
+        });
+    }
+}
+
+// ================================
 // Init
 // ================================
 function init() {
@@ -719,6 +738,7 @@ function init() {
     initScheduler();
     loadShortcuts();
     loadFocusModeSetting();
+    loadVersion();
 
     // Focus mode toggle button
     const focusToggle = document.getElementById("focus-toggle");

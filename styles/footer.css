@@ -1,0 +1,39 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem;
+    z-index: 1;
+}
+
+.footer-text {
+    font-size: 0.875rem;
+    opacity: 0.3;
+}
+
+.quick-settings {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
+.footer-settings-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-settings-button:hover {
+    opacity: 0.6;
+}

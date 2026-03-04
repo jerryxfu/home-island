@@ -1,11 +1,6 @@
 const ICON_UP = '<svg width="8" height="5" viewBox="0 0 8 5"><path d="M1 4L4 1L7 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const ICON_DOWN = '<svg width="8" height="5" viewBox="0 0 8 5"><path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-/** @type {any} */
-let chrome;
-/** @type {any} */
-let browser;
-
 // Default shortcuts
 const DEFAULT_SHORTCUTS = [
     {name: "Outlook", url: "https://outlook.live.com", favicon: ""},
@@ -217,3 +212,9 @@ document.getElementById("resetShortcuts").addEventListener("click", resetShortcu
 
 // Load on page load
 loadSettings().catch(error => console.error("Error loading settings:", error));
+
+// Show Chrome footer notice only on Chrome (not Firefox or other browsers)
+if (typeof browser === "undefined" && typeof chrome !== "undefined" && chrome.storage) {
+    document.getElementById("chromeNotice").classList.add("visible");
+}
+
