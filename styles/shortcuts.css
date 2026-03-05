@@ -11,6 +11,8 @@
     gap: 0.5rem;
     justify-content: flex-start;
     flex-wrap: wrap;
+    /* performance: limit style recalc scope on hover events */
+    contain: layout style;
 }
 
 .quick-link {
@@ -25,6 +27,8 @@
     text-decoration: none;
     color: inherit;
     transition: background 0.2s ease, transform 0.2s ease;
+    /* performance: own compositor layer so hover transform stays off main thread */
+    will-change: transform;
 }
 
 .quick-link:hover {
@@ -52,4 +56,3 @@
     font-size: 0.875rem;
     font-weight: 400;
 }
-

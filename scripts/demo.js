@@ -39,6 +39,11 @@ function startDemoMode() {
 
         $background.style.background = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${(i / (colors.length - 1)) * 100}%`).join(", ")})`;
         starsOpacity = getStarOpacity(demoHour);
+        if (starsOpacity > 0) {
+            startStarsLoop();
+        } else {
+            stopStarsLoop();
+        }
         updateTextColor(demoHour);
 
         updateClock();

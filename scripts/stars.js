@@ -25,7 +25,7 @@ function createStars() {
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(resizeStarsCanvas, 150);
-    });
+    }, {passive: true});
 
     // Generate star data (pure data objects, no DOM elements)
     const starCount = 135;
@@ -73,7 +73,12 @@ function createStars() {
 
     lastStarsTime = performance.now();
     if (starsAnimId) cancelAnimationFrame(starsAnimId);
-    starsAnimLoop();
+    starsAnimId = null;
+
+    // Only start if stars should be visible right now
+    if (getStarOpacity(getDecimalHour()) > 0) {
+        startStarsLoop();
+    }
 }
 
 function resizeStarsCanvas() {
@@ -84,11 +89,25 @@ function resizeStarsCanvas() {
     starsCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+function startStarsLoop() {
+    if (starsAnimId) return; // already running
+    lastStarsTime = performance.now();
+    starsAnimLoop();
+}
+
+function stopStarsLoop() {
+    if (starsAnimId) {
+        cancelAnimationFrame(starsAnimId);
+        starsAnimId = null;
+        // Clear the canvas so there's no stale frame
+        if (starsCtx && starsCanvas) {
+            starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+        }
+    }
+}
+
 function starsAnimLoop() {
     starsAnimId = requestAnimationFrame(starsAnimLoop);
-
-    // Zero CPU cost during daytime — skip entirely when stars aren't visible
-    if (starsOpacity <= 0) return;
 
     const now = performance.now();
     const elapsed = now - lastStarsTime;

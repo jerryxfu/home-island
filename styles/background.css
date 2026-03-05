@@ -6,9 +6,6 @@
     height: 100vh;
     z-index: -1;
     transition: background 6s ease-in-out;
-    /*
-     * Performance fix: Removed the infinite gradient-shift keyframe animation.
-     * main.js already updates the background gradient every 30s based on
-     * real time so the CSS animation was fighting it and adding compositor work.
-     */
+    /* performance: No pointer events needed on the background gradient */
+    pointer-events: none;
 }

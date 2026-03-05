@@ -54,10 +54,15 @@ function updateBackground() {
 
     const colors = getColorsForTime(hour);
     $background.style.background = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${(i / (colors.length - 1)) * 100}%`).join(", ")})`;
-    $background.style.backgroundSize = "150% 150%";
 
-    // Update star opacity — the canvas render loop reads this each frame
+    // star opacity and toggle the rAF loop accordingly.
+    // performance: Fully pauses the rAF during daytime (profiler shows idle ticks when the loop was always running)
     starsOpacity = getStarOpacity(hour);
+    if (starsOpacity > 0) {
+        startStarsLoop();
+    } else {
+        stopStarsLoop();
+    }
 
     updateTextColor(hour);
 }

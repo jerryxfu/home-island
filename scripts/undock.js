@@ -32,19 +32,26 @@ function initKeyboardShortcuts() {
         }
     });
 
+    // performance: {passive: true} tells the browser these handlers won't
+    // call preventDefault(), so it can skip blocking on them.
     document.addEventListener("click", () => {
         if (isUndocked) {
             dockScreen();
         } else {
             resetAutoUndockTimer();
         }
-    });
+    }, {passive: true});
 
+    // performance throttle mousemove to fire at most once per 2s
+    let lastMouseMoveReset = 0;
     document.addEventListener("mousemove", () => {
-        if (!isUndocked) {
+        if (isUndocked) return;
+        const now = Date.now();
+        if (now - lastMouseMoveReset > 2000) {
+            lastMouseMoveReset = now;
             resetAutoUndockTimer();
         }
-    });
+    }, {passive: true});
 
     loadAutoUndockSetting();
 }
