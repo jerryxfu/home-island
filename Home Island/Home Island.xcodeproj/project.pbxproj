@@ -1,0 +1,1011 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C49B12792F9BC8BE0064F1F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B12782F9BC8BE0064F1F8 /* AppDelegate.swift */; };
+		C49B127B2F9BC8BE0064F1F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B127A2F9BC8BE0064F1F8 /* SceneDelegate.swift */; };
+		C49B127E2F9BC8BE0064F1F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49B127C2F9BC8BE0064F1F8 /* LaunchScreen.storyboard */; };
+		C49B12812F9BC8BE0064F1F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49B127F2F9BC8BE0064F1F8 /* Main.storyboard */; };
+		C49B128A2F9BC8BE0064F1F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B12892F9BC8BE0064F1F8 /* AppDelegate.swift */; };
+		C49B128D2F9BC8BE0064F1F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49B128B2F9BC8BE0064F1F8 /* Main.storyboard */; };
+		C49B12942F9BC8BE0064F1F8 /* Home Island Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C49B12932F9BC8BE0064F1F8 /* Home Island Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C49B129E2F9BC8BE0064F1F8 /* Home Island Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C49B129D2F9BC8BE0064F1F8 /* Home Island Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C49B12A32F9BC8BE0064F1F8 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = C49B12682F9BC8BD0064F1F8 /* Main.html */; };
+		C49B12A42F9BC8BE0064F1F8 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = C49B12682F9BC8BD0064F1F8 /* Main.html */; };
+		C49B12A52F9BC8BE0064F1F8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B126A2F9BC8BD0064F1F8 /* Icon.png */; };
+		C49B12A62F9BC8BE0064F1F8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C49B126A2F9BC8BD0064F1F8 /* Icon.png */; };
+		C49B12A72F9BC8BE0064F1F8 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = C49B126B2F9BC8BD0064F1F8 /* Style.css */; };
+		C49B12A82F9BC8BE0064F1F8 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = C49B126B2F9BC8BD0064F1F8 /* Style.css */; };
+		C49B12A92F9BC8BE0064F1F8 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = C49B126C2F9BC8BD0064F1F8 /* Script.js */; };
+		C49B12AA2F9BC8BE0064F1F8 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = C49B126C2F9BC8BD0064F1F8 /* Script.js */; };
+		C49B12AB2F9BC8BE0064F1F8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B126D2F9BC8BD0064F1F8 /* ViewController.swift */; };
+		C49B12AC2F9BC8BE0064F1F8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B126D2F9BC8BD0064F1F8 /* ViewController.swift */; };
+		C49B12AD2F9BC8BE0064F1F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C49B126E2F9BC8BE0064F1F8 /* Assets.xcassets */; };
+		C49B12AE2F9BC8BE0064F1F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C49B126E2F9BC8BE0064F1F8 /* Assets.xcassets */; };
+		C49B12AF2F9BC8BE0064F1F8 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B12702F9BC8BE0064F1F8 /* SafariWebExtensionHandler.swift */; };
+		C49B12B02F9BC8BE0064F1F8 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B12702F9BC8BE0064F1F8 /* SafariWebExtensionHandler.swift */; };
+		C49B12CB2F9BC8BE0064F1F8 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C22F9BC8BE0064F1F8 /* index.html */; };
+		C49B12CC2F9BC8BE0064F1F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C32F9BC8BE0064F1F8 /* LICENSE */; };
+		C49B12CD2F9BC8BE0064F1F8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C42F9BC8BE0064F1F8 /* README.md */; };
+		C49B12CE2F9BC8BE0064F1F8 /* styles in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C52F9BC8BE0064F1F8 /* styles */; };
+		C49B12CF2F9BC8BE0064F1F8 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C62F9BC8BE0064F1F8 /* icons */; };
+		C49B12D02F9BC8BE0064F1F8 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C72F9BC8BE0064F1F8 /* scripts */; };
+		C49B12D22F9BC8BE0064F1F8 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C92F9BC8BE0064F1F8 /* manifest.json */; };
+		C49B12D32F9BC8BE0064F1F8 /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = C49B12CA2F9BC8BE0064F1F8 /* options.html */; };
+		C49B12D42F9BC8BE0064F1F8 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C22F9BC8BE0064F1F8 /* index.html */; };
+		C49B12D52F9BC8BE0064F1F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C32F9BC8BE0064F1F8 /* LICENSE */; };
+		C49B12D62F9BC8BE0064F1F8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C42F9BC8BE0064F1F8 /* README.md */; };
+		C49B12D72F9BC8BE0064F1F8 /* styles in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C52F9BC8BE0064F1F8 /* styles */; };
+		C49B12D82F9BC8BE0064F1F8 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C62F9BC8BE0064F1F8 /* icons */; };
+		C49B12D92F9BC8BE0064F1F8 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C72F9BC8BE0064F1F8 /* scripts */; };
+		C49B12DA2F9BC8BE0064F1F8 /* Home Island in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C82F9BC8BE0064F1F8 /* Home Island */; };
+		C49B12DB2F9BC8BE0064F1F8 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C92F9BC8BE0064F1F8 /* manifest.json */; };
+		C49B12DC2F9BC8BE0064F1F8 /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = C49B12CA2F9BC8BE0064F1F8 /* options.html */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C49B12952F9BC8BE0064F1F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C49B12622F9BC8BD0064F1F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C49B12922F9BC8BE0064F1F8;
+			remoteInfo = "Home Island Extension (iOS)";
+		};
+		C49B129F2F9BC8BE0064F1F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C49B12622F9BC8BD0064F1F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C49B129C2F9BC8BE0064F1F8;
+			remoteInfo = "Home Island Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C49B12B62F9BC8BE0064F1F8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C49B12942F9BC8BE0064F1F8 /* Home Island Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B12BD2F9BC8BE0064F1F8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C49B129E2F9BC8BE0064F1F8 /* Home Island Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C49B12692F9BC8BD0064F1F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
+		C49B126A2F9BC8BD0064F1F8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		C49B126B2F9BC8BD0064F1F8 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		C49B126C2F9BC8BD0064F1F8 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		C49B126D2F9BC8BD0064F1F8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C49B126E2F9BC8BE0064F1F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C49B12702F9BC8BE0064F1F8 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		C49B12752F9BC8BE0064F1F8 /* Home Island.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Island.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C49B12782F9BC8BE0064F1F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C49B127A2F9BC8BE0064F1F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C49B127D2F9BC8BE0064F1F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C49B12802F9BC8BE0064F1F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C49B12822F9BC8BE0064F1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C49B12872F9BC8BE0064F1F8 /* Home Island.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Island.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C49B12892F9BC8BE0064F1F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C49B128C2F9BC8BE0064F1F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C49B128E2F9BC8BE0064F1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C49B12932F9BC8BE0064F1F8 /* Home Island Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Home Island Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C49B12982F9BC8BE0064F1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C49B129D2F9BC8BE0064F1F8 /* Home Island Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Home Island Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C49B12A22F9BC8BE0064F1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C49B12C22F9BC8BE0064F1F8 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = index.html; path = ../../index.html; sourceTree = "<group>"; };
+		C49B12C32F9BC8BE0064F1F8 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
+		C49B12C42F9BC8BE0064F1F8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		C49B12C52F9BC8BE0064F1F8 /* styles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = styles; path = ../../styles; sourceTree = "<group>"; };
+		C49B12C62F9BC8BE0064F1F8 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../../icons; sourceTree = "<group>"; };
+		C49B12C72F9BC8BE0064F1F8 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = scripts; path = ../../scripts; sourceTree = "<group>"; };
+		C49B12C82F9BC8BE0064F1F8 /* Home Island */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Home Island"; sourceTree = SOURCE_ROOT; };
+		C49B12C92F9BC8BE0064F1F8 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../manifest.json; sourceTree = "<group>"; };
+		C49B12CA2F9BC8BE0064F1F8 /* options.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = options.html; path = ../../options.html; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C49B12722F9BC8BE0064F1F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B12842F9BC8BE0064F1F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B12902F9BC8BE0064F1F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B129A2F9BC8BE0064F1F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C49B12612F9BC8BD0064F1F8 = {
+			isa = PBXGroup;
+			children = (
+				C49B12662F9BC8BD0064F1F8 /* Shared (App) */,
+				C49B126F2F9BC8BE0064F1F8 /* Shared (Extension) */,
+				C49B12772F9BC8BE0064F1F8 /* iOS (App) */,
+				C49B12882F9BC8BE0064F1F8 /* macOS (App) */,
+				C49B12972F9BC8BE0064F1F8 /* iOS (Extension) */,
+				C49B12A12F9BC8BE0064F1F8 /* macOS (Extension) */,
+				C49B12762F9BC8BE0064F1F8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C49B12662F9BC8BD0064F1F8 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				C49B126D2F9BC8BD0064F1F8 /* ViewController.swift */,
+				C49B126E2F9BC8BE0064F1F8 /* Assets.xcassets */,
+				C49B12672F9BC8BD0064F1F8 /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		C49B12672F9BC8BD0064F1F8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C49B12682F9BC8BD0064F1F8 /* Main.html */,
+				C49B126A2F9BC8BD0064F1F8 /* Icon.png */,
+				C49B126B2F9BC8BD0064F1F8 /* Style.css */,
+				C49B126C2F9BC8BD0064F1F8 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C49B126F2F9BC8BE0064F1F8 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				C49B12C12F9BC8BE0064F1F8 /* Resources */,
+				C49B12702F9BC8BE0064F1F8 /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		C49B12762F9BC8BE0064F1F8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C49B12752F9BC8BE0064F1F8 /* Home Island.app */,
+				C49B12872F9BC8BE0064F1F8 /* Home Island.app */,
+				C49B12932F9BC8BE0064F1F8 /* Home Island Extension.appex */,
+				C49B129D2F9BC8BE0064F1F8 /* Home Island Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C49B12772F9BC8BE0064F1F8 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				C49B12782F9BC8BE0064F1F8 /* AppDelegate.swift */,
+				C49B127A2F9BC8BE0064F1F8 /* SceneDelegate.swift */,
+				C49B127C2F9BC8BE0064F1F8 /* LaunchScreen.storyboard */,
+				C49B127F2F9BC8BE0064F1F8 /* Main.storyboard */,
+				C49B12822F9BC8BE0064F1F8 /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		C49B12882F9BC8BE0064F1F8 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				C49B12892F9BC8BE0064F1F8 /* AppDelegate.swift */,
+				C49B128B2F9BC8BE0064F1F8 /* Main.storyboard */,
+				C49B128E2F9BC8BE0064F1F8 /* Info.plist */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		C49B12972F9BC8BE0064F1F8 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				C49B12982F9BC8BE0064F1F8 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		C49B12A12F9BC8BE0064F1F8 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				C49B12A22F9BC8BE0064F1F8 /* Info.plist */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		C49B12C12F9BC8BE0064F1F8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C49B12C22F9BC8BE0064F1F8 /* index.html */,
+				C49B12C32F9BC8BE0064F1F8 /* LICENSE */,
+				C49B12C42F9BC8BE0064F1F8 /* README.md */,
+				C49B12C52F9BC8BE0064F1F8 /* styles */,
+				C49B12C62F9BC8BE0064F1F8 /* icons */,
+				C49B12C72F9BC8BE0064F1F8 /* scripts */,
+				C49B12C82F9BC8BE0064F1F8 /* Home Island */,
+				C49B12C92F9BC8BE0064F1F8 /* manifest.json */,
+				C49B12CA2F9BC8BE0064F1F8 /* options.html */,
+			);
+			name = Resources;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C49B12742F9BC8BE0064F1F8 /* Home Island (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C49B12B72F9BC8BE0064F1F8 /* Build configuration list for PBXNativeTarget "Home Island (iOS)" */;
+			buildPhases = (
+				C49B12712F9BC8BE0064F1F8 /* Sources */,
+				C49B12722F9BC8BE0064F1F8 /* Frameworks */,
+				C49B12732F9BC8BE0064F1F8 /* Resources */,
+				C49B12B62F9BC8BE0064F1F8 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C49B12962F9BC8BE0064F1F8 /* PBXTargetDependency */,
+			);
+			name = "Home Island (iOS)";
+			packageProductDependencies = (
+			);
+			productName = "Home Island (iOS)";
+			productReference = C49B12752F9BC8BE0064F1F8 /* Home Island.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C49B12862F9BC8BE0064F1F8 /* Home Island (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C49B12BE2F9BC8BE0064F1F8 /* Build configuration list for PBXNativeTarget "Home Island (macOS)" */;
+			buildPhases = (
+				C49B12832F9BC8BE0064F1F8 /* Sources */,
+				C49B12842F9BC8BE0064F1F8 /* Frameworks */,
+				C49B12852F9BC8BE0064F1F8 /* Resources */,
+				C49B12BD2F9BC8BE0064F1F8 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C49B12A02F9BC8BE0064F1F8 /* PBXTargetDependency */,
+			);
+			name = "Home Island (macOS)";
+			packageProductDependencies = (
+			);
+			productName = "Home Island (macOS)";
+			productReference = C49B12872F9BC8BE0064F1F8 /* Home Island.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C49B12922F9BC8BE0064F1F8 /* Home Island Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C49B12B32F9BC8BE0064F1F8 /* Build configuration list for PBXNativeTarget "Home Island Extension (iOS)" */;
+			buildPhases = (
+				C49B128F2F9BC8BE0064F1F8 /* Sources */,
+				C49B12902F9BC8BE0064F1F8 /* Frameworks */,
+				C49B12912F9BC8BE0064F1F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Home Island Extension (iOS)";
+			packageProductDependencies = (
+			);
+			productName = "Home Island Extension (iOS)";
+			productReference = C49B12932F9BC8BE0064F1F8 /* Home Island Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		C49B129C2F9BC8BE0064F1F8 /* Home Island Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C49B12BA2F9BC8BE0064F1F8 /* Build configuration list for PBXNativeTarget "Home Island Extension (macOS)" */;
+			buildPhases = (
+				C49B12992F9BC8BE0064F1F8 /* Sources */,
+				C49B129A2F9BC8BE0064F1F8 /* Frameworks */,
+				C49B129B2F9BC8BE0064F1F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Home Island Extension (macOS)";
+			packageProductDependencies = (
+			);
+			productName = "Home Island Extension (macOS)";
+			productReference = C49B129D2F9BC8BE0064F1F8 /* Home Island Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C49B12622F9BC8BD0064F1F8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2640;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					C49B12742F9BC8BE0064F1F8 = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+					C49B12862F9BC8BE0064F1F8 = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+					C49B12922F9BC8BE0064F1F8 = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+					C49B129C2F9BC8BE0064F1F8 = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+				};
+			};
+			buildConfigurationList = C49B12652F9BC8BD0064F1F8 /* Build configuration list for PBXProject "Home Island" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C49B12612F9BC8BD0064F1F8;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C49B12762F9BC8BE0064F1F8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C49B12742F9BC8BE0064F1F8 /* Home Island (iOS) */,
+				C49B12862F9BC8BE0064F1F8 /* Home Island (macOS) */,
+				C49B12922F9BC8BE0064F1F8 /* Home Island Extension (iOS) */,
+				C49B129C2F9BC8BE0064F1F8 /* Home Island Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C49B12732F9BC8BE0064F1F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49B12A52F9BC8BE0064F1F8 /* Icon.png in Resources */,
+				C49B127E2F9BC8BE0064F1F8 /* LaunchScreen.storyboard in Resources */,
+				C49B12A32F9BC8BE0064F1F8 /* Main.html in Resources */,
+				C49B12A92F9BC8BE0064F1F8 /* Script.js in Resources */,
+				C49B12AD2F9BC8BE0064F1F8 /* Assets.xcassets in Resources */,
+				C49B12812F9BC8BE0064F1F8 /* Main.storyboard in Resources */,
+				C49B12A72F9BC8BE0064F1F8 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B12852F9BC8BE0064F1F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49B12A62F9BC8BE0064F1F8 /* Icon.png in Resources */,
+				C49B12A82F9BC8BE0064F1F8 /* Style.css in Resources */,
+				C49B128D2F9BC8BE0064F1F8 /* Main.storyboard in Resources */,
+				C49B12AA2F9BC8BE0064F1F8 /* Script.js in Resources */,
+				C49B12AE2F9BC8BE0064F1F8 /* Assets.xcassets in Resources */,
+				C49B12A42F9BC8BE0064F1F8 /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B12912F9BC8BE0064F1F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49B12D62F9BC8BE0064F1F8 /* README.md in Resources */,
+				C49B12D52F9BC8BE0064F1F8 /* LICENSE in Resources */,
+				C49B12D72F9BC8BE0064F1F8 /* styles in Resources */,
+				C49B12D92F9BC8BE0064F1F8 /* scripts in Resources */,
+				C49B12DB2F9BC8BE0064F1F8 /* manifest.json in Resources */,
+				C49B12DA2F9BC8BE0064F1F8 /* Home Island in Resources */,
+				C49B12D82F9BC8BE0064F1F8 /* icons in Resources */,
+				C49B12D42F9BC8BE0064F1F8 /* index.html in Resources */,
+				C49B12DC2F9BC8BE0064F1F8 /* options.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B129B2F9BC8BE0064F1F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49B12CD2F9BC8BE0064F1F8 /* README.md in Resources */,
+				C49B12CC2F9BC8BE0064F1F8 /* LICENSE in Resources */,
+				C49B12CE2F9BC8BE0064F1F8 /* styles in Resources */,
+				C49B12D02F9BC8BE0064F1F8 /* scripts in Resources */,
+				C49B12D22F9BC8BE0064F1F8 /* manifest.json in Resources */,
+				C49B12CF2F9BC8BE0064F1F8 /* icons in Resources */,
+				C49B12CB2F9BC8BE0064F1F8 /* index.html in Resources */,
+				C49B12D32F9BC8BE0064F1F8 /* options.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C49B12712F9BC8BE0064F1F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49B12AB2F9BC8BE0064F1F8 /* ViewController.swift in Sources */,
+				C49B12792F9BC8BE0064F1F8 /* AppDelegate.swift in Sources */,
+				C49B127B2F9BC8BE0064F1F8 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B12832F9BC8BE0064F1F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49B12AC2F9BC8BE0064F1F8 /* ViewController.swift in Sources */,
+				C49B128A2F9BC8BE0064F1F8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B128F2F9BC8BE0064F1F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49B12AF2F9BC8BE0064F1F8 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49B12992F9BC8BE0064F1F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49B12B02F9BC8BE0064F1F8 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C49B12962F9BC8BE0064F1F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C49B12922F9BC8BE0064F1F8 /* Home Island Extension (iOS) */;
+			targetProxy = C49B12952F9BC8BE0064F1F8 /* PBXContainerItemProxy */;
+		};
+		C49B12A02F9BC8BE0064F1F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C49B129C2F9BC8BE0064F1F8 /* Home Island Extension (macOS) */;
+			targetProxy = C49B129F2F9BC8BE0064F1F8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C49B12682F9BC8BD0064F1F8 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C49B12692F9BC8BD0064F1F8 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		C49B127C2F9BC8BE0064F1F8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C49B127D2F9BC8BE0064F1F8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C49B127F2F9BC8BE0064F1F8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C49B12802F9BC8BE0064F1F8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C49B128B2F9BC8BE0064F1F8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C49B128C2F9BC8BE0064F1F8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C49B12B12F9BC8BE0064F1F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C49B12B22F9BC8BE0064F1F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		C49B12B42F9BC8BE0064F1F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Home Island Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island.Extension";
+				PRODUCT_NAME = "Home Island Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C49B12B52F9BC8BE0064F1F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Home Island Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island.Extension";
+				PRODUCT_NAME = "Home Island Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C49B12B82F9BC8BE0064F1F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HWB4Y653YR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Home Island";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island";
+				PRODUCT_NAME = "Home Island";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C49B12B92F9BC8BE0064F1F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HWB4Y653YR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Home Island";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island";
+				PRODUCT_NAME = "Home Island";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C49B12BB2F9BC8BE0064F1F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Home Island Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island.Extension";
+				PRODUCT_NAME = "Home Island Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C49B12BC2F9BC8BE0064F1F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Home Island Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island.Extension";
+				PRODUCT_NAME = "Home Island Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C49B12BF2F9BC8BE0064F1F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Home Island";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island";
+				PRODUCT_NAME = "Home Island";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C49B12C02F9BC8BE0064F1F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Home Island";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island";
+				PRODUCT_NAME = "Home Island";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C49B12652F9BC8BD0064F1F8 /* Build configuration list for PBXProject "Home Island" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C49B12B12F9BC8BE0064F1F8 /* Debug */,
+				C49B12B22F9BC8BE0064F1F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C49B12B32F9BC8BE0064F1F8 /* Build configuration list for PBXNativeTarget "Home Island Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C49B12B42F9BC8BE0064F1F8 /* Debug */,
+				C49B12B52F9BC8BE0064F1F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C49B12B72F9BC8BE0064F1F8 /* Build configuration list for PBXNativeTarget "Home Island (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C49B12B82F9BC8BE0064F1F8 /* Debug */,
+				C49B12B92F9BC8BE0064F1F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C49B12BA2F9BC8BE0064F1F8 /* Build configuration list for PBXNativeTarget "Home Island Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C49B12BB2F9BC8BE0064F1F8 /* Debug */,
+				C49B12BC2F9BC8BE0064F1F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C49B12BE2F9BC8BE0064F1F8 /* Build configuration list for PBXNativeTarget "Home Island (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C49B12BF2F9BC8BE0064F1F8 /* Debug */,
+				C49B12C02F9BC8BE0064F1F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C49B12622F9BC8BD0064F1F8 /* Project object */;
+}
