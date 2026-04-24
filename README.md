@@ -19,3 +19,11 @@ To personalize your experience:
 
 1. **Chrome**: Right-click the extension icon → Click "Options"
 2. **Firefox**: Go to `about:addons` → Find "Home Island" → Click "Options"
+
+## Developer notes
+
+Run the following command at the root of the project to generate the Safari version of the extension:
+
+```
+xcrun safari-web-extension-converter .
+```
