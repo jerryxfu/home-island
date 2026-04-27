@@ -3,10 +3,10 @@ function loadVersion() {
     const versionSpan = document.getElementById("version");
     if (!versionSpan) return;
 
-    if (chrome?.runtime?.getManifest) {
+    if (typeof chrome !== "undefined" && chrome.runtime?.getManifest) {
         const manifest = chrome.runtime.getManifest();
         versionSpan.textContent = `v${manifest.version}`;
-    } else if (typeof browser !== "undefined" && browser?.runtime?.getManifest) {
+    } else if (typeof browser !== "undefined" && browser.runtime?.getManifest) {
         const manifest = browser.runtime.getManifest();
         versionSpan.textContent = `v${manifest.version}`;
     } else {

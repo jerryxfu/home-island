@@ -23,8 +23,8 @@ const DEFAULT_SHORTCUTS = [
 // Storage helper
 const storage = {
     get: keys => new Promise(resolve => {
-        if (chrome?.storage) chrome.storage.local.get(keys, resolve);
-        else if (browser?.storage) browser.storage.local.get(keys).then(resolve);
+        if (typeof chrome !== "undefined" && chrome.storage) chrome.storage.local.get(keys, resolve);
+        else if (typeof browser !== "undefined" && browser.storage) browser.storage.local.get(keys).then(resolve);
         else {
             const result = {};
             keys.forEach(k => result[k] = localStorage.getItem(k));
@@ -32,8 +32,8 @@ const storage = {
         }
     }),
     set: data => new Promise(resolve => {
-        if (chrome?.storage) chrome.storage.local.set(data, resolve);
-        else if (browser?.storage) browser.storage.local.set(data).then(resolve);
+        if (typeof chrome !== "undefined" && chrome.storage) chrome.storage.local.set(data, resolve);
+        else if (typeof browser !== "undefined" && browser.storage) browser.storage.local.set(data).then(resolve);
         else {
             Object.entries(data).forEach(([k, v]) => localStorage.setItem(k, String(v)));
             resolve();

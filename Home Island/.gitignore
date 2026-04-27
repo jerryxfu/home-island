@@ -1,0 +1,14 @@
+# Xcode
+build/
+*.xcbuilddata
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xccheckout
+*.moved-aside
+Home Island.xcodeproj/xcuserdata
+
+cd "/Users/jerry/code/repos/home-island"
+git rm --cached "Home Island/Home Island.xcodeproj/project.xcworkspace/xcuserdata/jerry.xcuserdatad/UserInterfaceState.xcuserstate"
+git add "Home Island/.gitignore"
+git commit -m "Stop tracking Xcode user state files"

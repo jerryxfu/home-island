@@ -46,6 +46,8 @@
 		C49B12DA2F9BC8BE0064F1F8 /* Home Island in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C82F9BC8BE0064F1F8 /* Home Island */; };
 		C49B12DB2F9BC8BE0064F1F8 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = C49B12C92F9BC8BE0064F1F8 /* manifest.json */; };
 		C49B12DC2F9BC8BE0064F1F8 /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = C49B12CA2F9BC8BE0064F1F8 /* options.html */; };
+		C49B12DE2F9BC8BE0064F1F8 /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = C49B12DD2F9BC8BE0064F1F8 /* main.css */; };
+		C49B12DF2F9BC8BE0064F1F8 /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = C49B12DD2F9BC8BE0064F1F8 /* main.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +123,7 @@
 		C49B12C82F9BC8BE0064F1F8 /* Home Island */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Home Island"; sourceTree = SOURCE_ROOT; };
 		C49B12C92F9BC8BE0064F1F8 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../manifest.json; sourceTree = "<group>"; };
 		C49B12CA2F9BC8BE0064F1F8 /* options.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = options.html; path = ../../options.html; sourceTree = "<group>"; };
+		C49B12DD2F9BC8BE0064F1F8 /* main.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = main.css; path = ../../main.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				C49B12C22F9BC8BE0064F1F8 /* index.html */,
+				C49B12DD2F9BC8BE0064F1F8 /* main.css */,
 				C49B12C32F9BC8BE0064F1F8 /* LICENSE */,
 				C49B12C42F9BC8BE0064F1F8 /* README.md */,
 				C49B12C52F9BC8BE0064F1F8 /* styles */,
@@ -425,6 +429,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49B12DF2F9BC8BE0064F1F8 /* main.css in Resources */,
 				C49B12D62F9BC8BE0064F1F8 /* README.md in Resources */,
 				C49B12D52F9BC8BE0064F1F8 /* LICENSE in Resources */,
 				C49B12D72F9BC8BE0064F1F8 /* styles in Resources */,
@@ -441,6 +446,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49B12DE2F9BC8BE0064F1F8 /* main.css in Resources */,
 				C49B12CD2F9BC8BE0064F1F8 /* README.md in Resources */,
 				C49B12CC2F9BC8BE0064F1F8 /* LICENSE in Resources */,
 				C49B12CE2F9BC8BE0064F1F8 /* styles in Resources */,
@@ -660,6 +666,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HWB4Y653YR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Home Island Extension";
@@ -675,7 +682,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island.Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island.ios.extension";
 				PRODUCT_NAME = "Home Island Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -693,6 +700,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HWB4Y653YR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Home Island Extension";
@@ -708,7 +716,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island.Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island.ios.extension";
 				PRODUCT_NAME = "Home Island Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -750,7 +758,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island.ios";
 				PRODUCT_NAME = "Home Island";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -791,7 +799,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island.ios";
 				PRODUCT_NAME = "Home Island";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -810,8 +818,19 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HWB4Y653YR;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
@@ -823,12 +842,12 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island.Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island.macos.extension";
 				PRODUCT_NAME = "Home Island Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -845,8 +864,19 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HWB4Y653YR;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
@@ -858,12 +888,12 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island.Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island.macos.extension";
 				PRODUCT_NAME = "Home Island Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -882,6 +912,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HWB4Y653YR;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
@@ -903,7 +934,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island.macos";
 				PRODUCT_NAME = "Home Island";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
@@ -923,6 +954,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HWB4Y653YR;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
@@ -944,7 +976,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Home-Island";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jerryxf.home-island.macos";
 				PRODUCT_NAME = "Home Island";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
