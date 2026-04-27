@@ -4,10 +4,7 @@ A beautiful, minimalist browser extension that transforms your new tab page into
 
 ## 🛍️ Installation links
 
--
-
-Chrome: [https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpbkoggbhecmbhoep](https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpbkoggbhecmbhoep)
-
+- Chrome: [https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpbkoggbhecmbhoep](https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpbkoggbhecmbhoep)
 - Firefox: [https://addons.mozilla.org/firefox/addon/home-island/](https://addons.mozilla.org/firefox/addon/home-island/)
 - Safari: Available soon on the App Store (search for "Home Island")
 
