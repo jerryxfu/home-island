@@ -30,7 +30,7 @@
     <div class="setting-group">
         <div class="toggle-row">
             <div>
-                <div class="toggle-label">Demo Mode</div>
+                <label for="demoToggle">Demo Mode</label>
                 <div class="toggle-description">Fast-forward through 24 hours</div>
             </div>
             <label class="toggle">
@@ -54,14 +54,14 @@
         </select>
     </div>
 
-    <div class="setting-group">
+    <div class="setting-group is-disabled" aria-disabled="true">
         <div class="toggle-row">
             <div>
-                <div class="toggle-label">Show Scheduler</div>
+                <label for="schedulerToggle">Show Scheduler (disabled during summer)</label>
                 <div class="toggle-description">Display scheduler on the right side</div>
             </div>
             <label class="toggle">
-                <input type="checkbox" id="schedulerToggle">
+                <input type="checkbox" id="schedulerToggle" disabled>
                 <span class="toggle-slider"></span>
             </label>
         </div>

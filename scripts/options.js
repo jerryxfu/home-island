@@ -44,14 +44,21 @@ const storage = {
 // Load settings
 async function loadSettings() {
     const result = await storage.get(["userName", "demoMode", "autoUndockDelay", "showScheduler", "schedulerId", "shortcuts"]);
+    const schedulerToggle = document.getElementById("schedulerToggle");
+    const schedulerIdGroup = document.getElementById("schedulerIdGroup");
 
     if (result.userName) document.getElementById("userName").value = result.userName;
     if (result.demoMode === true || result.demoMode === "true") document.getElementById("demoToggle").checked = true;
     if (result.autoUndockDelay) document.getElementById("autoUndock").value = result.autoUndockDelay;
-    if (result.showScheduler === true || result.showScheduler === "true") {
-        document.getElementById("schedulerToggle").checked = true;
-        document.getElementById("schedulerIdGroup").style.display = "block";
+
+    if (schedulerToggle.disabled) {
+        schedulerToggle.checked = false;
+        schedulerIdGroup.style.display = "none";
+    } else if (result.showScheduler === true || result.showScheduler === "true") {
+        schedulerToggle.checked = true;
+        schedulerIdGroup.style.display = "block";
     }
+
     if (result.schedulerId) document.getElementById("schedulerId").value = result.schedulerId;
 
     renderShortcuts(result.shortcuts ? JSON.parse(result.shortcuts) : DEFAULT_SHORTCUTS);
@@ -274,7 +281,8 @@ async function saveSettings() {
     const userName = document.getElementById("userName").value.trim();
     const demoMode = document.getElementById("demoToggle").checked;
     const autoUndockDelay = document.getElementById("autoUndock").value;
-    const showScheduler = document.getElementById("schedulerToggle").checked;
+    const schedulerToggle = document.getElementById("schedulerToggle");
+    const showScheduler = schedulerToggle.disabled ? false : schedulerToggle.checked;
     const schedulerId = document.getElementById("schedulerId").value.trim();
 
     // Show/hide scheduler ID field based on toggle

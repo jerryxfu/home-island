@@ -11,12 +11,12 @@ function loadVersion() {
         versionSpan.textContent = `v${manifest.version}`;
     } else {
         fetch("manifest.json")
-            .then(res => res.json())
-            .then(manifest => {
-                versionSpan.textContent = `v${manifest.version}`;
-            })
-            .catch(() => {
-                versionSpan.textContent = "";
-            });
+        .then(res => res.json())
+        .then(manifest => {
+            versionSpan.textContent = `v${manifest.version}`;
+        })
+        .catch(() => {
+            versionSpan.textContent = "";
+        });
     }
 }
