@@ -1,5 +1,11 @@
 const ICON_UP = '<svg width="8" height="5" viewBox="0 0 8 5"><path d="M1 4L4 1L7 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const ICON_DOWN = '<svg width="8" height="5" viewBox="0 0 8 5"><path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const $dynamicBackground = document.getElementById("dynamic-background");
+let demoHour = 0;
+let demoIntervalId = null;
+let realtimeThemeIntervalId = null;
+const demoUpdatesPerSecond = 30;
+const demoHoursPerUpdate = 0.04;
 
 // Default shortcuts
 const DEFAULT_SHORTCUTS = [
@@ -49,6 +55,91 @@ async function loadSettings() {
     if (result.schedulerId) document.getElementById("schedulerId").value = result.schedulerId;
 
     renderShortcuts(result.shortcuts ? JSON.parse(result.shortcuts) : DEFAULT_SHORTCUTS);
+}
+
+function getDecimalHourNow() {
+    const now = new Date();
+    return now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+}
+
+function getCurrentThemeHour() {
+    return isDemoModeEnabled() ? demoHour : getDecimalHourNow();
+}
+
+// Used by stars.js when deciding whether stars should run
+function getDecimalHour() {
+    return getCurrentThemeHour();
+}
+
+function isDemoModeEnabled() {
+    return document.getElementById("demoToggle").checked;
+}
+
+function applyThemeForHour(hour) {
+    if (!$dynamicBackground || !window.HomeIslandTheme) return;
+
+    const snapshot = window.HomeIslandTheme.getThemeSnapshot(hour);
+    $dynamicBackground.style.background = snapshot.gradient;
+    window.HomeIslandTheme.applyTextModeClass(hour);
+
+    // Keep stars in sync with the same day/night curve used on the main page
+    if (typeof starsOpacity !== "undefined") {
+        starsOpacity = snapshot.starOpacity;
+        if (starsOpacity > 0 && typeof startStarsLoop === "function") {
+            startStarsLoop();
+        } else if (typeof stopStarsLoop === "function") {
+            stopStarsLoop();
+        }
+    }
+}
+
+function updateOptionsTheme() {
+    applyThemeForHour(getCurrentThemeHour());
+}
+
+function stopDemoThemeLoop() {
+    if (demoIntervalId) {
+        clearInterval(demoIntervalId);
+        demoIntervalId = null;
+    }
+}
+
+function stopRealtimeThemeLoop() {
+    if (realtimeThemeIntervalId) {
+        clearInterval(realtimeThemeIntervalId);
+        realtimeThemeIntervalId = null;
+    }
+}
+
+function startDemoThemeLoop() {
+    stopRealtimeThemeLoop();
+    stopDemoThemeLoop();
+
+    demoHour = getDecimalHourNow();
+    applyThemeForHour(demoHour);
+
+    demoIntervalId = setInterval(() => {
+        if (!isDemoModeEnabled()) return;
+        demoHour += demoHoursPerUpdate;
+        if (demoHour >= 24) demoHour = 0;
+        applyThemeForHour(demoHour);
+    }, 1000 / demoUpdatesPerSecond);
+}
+
+function startRealtimeThemeLoop() {
+    stopDemoThemeLoop();
+    stopRealtimeThemeLoop();
+
+    updateOptionsTheme();
+    realtimeThemeIntervalId = setInterval(updateOptionsTheme, 30000);
+}
+
+function syncThemeLoopMode() {
+    if (isDemoModeEnabled()) {
+        startDemoThemeLoop();
+    } else {
+        startRealtimeThemeLoop();
+    }
 }
 
 // Render shortcuts list
@@ -204,6 +295,7 @@ function showStatus(message) {
 // Event listeners - auto save on change
 document.getElementById("userName").addEventListener("input", saveSettings);
 document.getElementById("demoToggle").addEventListener("change", saveSettings);
+document.getElementById("demoToggle").addEventListener("change", syncThemeLoopMode);
 document.getElementById("autoUndock").addEventListener("change", saveSettings);
 document.getElementById("schedulerToggle").addEventListener("change", saveSettings);
 document.getElementById("schedulerId").addEventListener("input", saveSettings);
@@ -211,10 +303,19 @@ document.getElementById("addShortcut").addEventListener("click", addShortcut);
 document.getElementById("resetShortcuts").addEventListener("click", resetShortcuts);
 
 // Load on page load
-loadSettings().catch(error => console.error("Error loading settings:", error));
+if (typeof createStars === "function") {
+    createStars();
+}
+
+requestAnimationFrame(() => {
+    document.body.classList.add("transitions-ready");
+});
+
+loadSettings()
+.then(syncThemeLoopMode)
+.catch(error => console.error("Error loading settings:", error));
 
 // Show Chrome footer notice only on Chrome (not Firefox or other browsers)
 if (typeof browser === "undefined" && typeof chrome !== "undefined" && chrome.storage) {
     document.getElementById("chromeNotice").classList.add("visible");
 }
-

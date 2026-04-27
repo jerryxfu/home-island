@@ -28,7 +28,7 @@ function createStars() {
     }, {passive: true});
 
     // Generate star data (pure data objects, no DOM elements)
-    const starCount = 135;
+    const starCount = 88;
     const sizeRadii = [0.5, 1, 1.5];
     const glowRadii = [2, 4, 6];
     const glowAlphas = [0.3, 0.4, 0.5];
@@ -76,7 +76,7 @@ function createStars() {
     starsAnimId = null;
 
     // Only start if stars should be visible right now
-    if (getStarOpacity(getDecimalHour()) > 0) {
+    if (window.HomeIslandTheme?.getStarOpacity(getDecimalHour()) > 0) {
         startStarsLoop();
     }
 }

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/background.css">
+    <link rel="stylesheet" href="styles/stars.css">
     <link rel="stylesheet" href="styles/options.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +12,8 @@
     <title>Home Island Settings</title>
 </head>
 <body>
+<div class="dynamic-background" id="dynamic-background"></div>
+<div class="stars-container" id="stars-container"></div>
 <div class="container">
     <a href="./index.html" class="home-title">🏝️ Home Island</a>
     <p class="subtitle">Personalize your new tab experience</p>
@@ -44,7 +48,9 @@
             <option value="15000">15 seconds</option>
             <option value="30000">30 seconds</option>
             <option value="60000">1 minute</option>
+            <option value="120000">2 minutes</option>
             <option value="300000">5 minutes</option>
+            <option value="600000">10 minutes</option>
         </select>
     </div>
 
@@ -82,6 +88,8 @@
     <div class="status" id="status"></div>
 </div>
 
+<script src="scripts/theme.js"></script>
+<script src="scripts/stars.js"></script>
 <script src="scripts/options.js"></script>
 </body>
 </html>

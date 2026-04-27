@@ -35,16 +35,17 @@ function startDemoMode() {
         demoHour += demoHoursPerUpdate;
         if (demoHour >= 24) demoHour = 0;
 
-        const colors = getColorsForTime(demoHour);
+        const snapshot = window.HomeIslandTheme?.getThemeSnapshot(demoHour);
+        if (!snapshot) return;
 
-        $background.style.background = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${(i / (colors.length - 1)) * 100}%`).join(", ")})`;
-        starsOpacity = getStarOpacity(demoHour);
+        $background.style.background = snapshot.gradient;
+        starsOpacity = snapshot.starOpacity;
         if (starsOpacity > 0) {
             startStarsLoop();
         } else {
             stopStarsLoop();
         }
-        updateTextColor(demoHour);
+        window.HomeIslandTheme.applyTextModeClass(demoHour);
 
         updateClock();
         updateGreeting();
