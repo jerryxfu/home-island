@@ -24,7 +24,7 @@ Chrome: [https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpb
 ### Bundle extension without Safari support:
 
 ```
-zip -r home-island.zip . --exclude "Home Island/*" --exclude ".git/*" --exclude "LICENSE"
+zip -r extension.zip . --exclude "Home Island/*" --exclude ".git/*" --exclude "*.zip" --exclude "LICENSE" --exclude "*.DS_Store" --exclude "*/.DS_Store"
 ```
 
 ### Xcode project for Safari support:
