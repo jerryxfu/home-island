@@ -8,24 +8,31 @@ let shootingStarsData = [];
 let starsOpacity = 0;
 let starsAnimId = null;
 let lastStarsTime = 0;
+let starsResizeHandler = null;
+let starsResizeTimer = null;
 
 function createStars() {
     const container = document.getElementById("stars-container");
+    if (!container) return;
     container.innerHTML = "";
 
     starsCanvas = document.createElement("canvas");
     starsCanvas.id = "stars-canvas";
     container.appendChild(starsCanvas);
     starsCtx = starsCanvas.getContext("2d");
+    if (!starsCtx) return;
 
     resizeStarsCanvas();
 
     // Debounce resize to avoid excessive canvas re-allocations
-    let resizeTimer;
-    window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(resizeStarsCanvas, 150);
-    }, {passive: true});
+    if (starsResizeHandler) {
+        window.removeEventListener("resize", starsResizeHandler);
+    }
+    starsResizeHandler = () => {
+        clearTimeout(starsResizeTimer);
+        starsResizeTimer = setTimeout(resizeStarsCanvas, 150);
+    };
+    window.addEventListener("resize", starsResizeHandler, {passive: true});
 
     // Generate star data (pure data objects, no DOM elements)
     const starCount = 88;
@@ -54,20 +61,27 @@ function createStars() {
             glowRadius: glowRadii[sizeIndex],
             glowAlpha: glowAlphas[sizeIndex],
             phase: Math.random() * Math.PI * 2,
-            speed: 2 + Math.random() * 4,
+            // Twinkle period in seconds (slightly higher minimum to avoid very fast pulsing)
+            speed: 2.8 + Math.random() * 3.2,
         });
     }
 
     // Shooting star data
     shootingStarsData = [];
     for (let i = 0; i < 3; i++) {
+        const angle = (24 + Math.random() * 10) * (Math.PI / 180);
+        const stagger = i * 6;
         shootingStarsData.push({
-            x: 0.1 + Math.random() * 0.6,
-            y: Math.random() * 0.4,
-            delay: 5 + Math.random() * 20,
-            period: 15 + Math.random() * 15,
-            angle: 30 * (Math.PI / 180),
-            length: 150,
+            x: 0.1 + Math.random() * 0.55,
+            y: 0.03 + Math.random() * 0.32,
+            delay: 4 + stagger + Math.random() * 5,
+            period: 18 + Math.random() * 12,
+            angle,
+            length: 120 + Math.random() * 50,
+            travel: 250 + Math.random() * 60,
+            visibleFraction: 0.13 + Math.random() * 0.06,
+            lineWidth: 0.75 + Math.random() * 0.45,
+            opacity: 0.55 + Math.random() * 0.2,
         });
     }
 
@@ -82,10 +96,11 @@ function createStars() {
 }
 
 function resizeStarsCanvas() {
-    if (!starsCanvas) return;
-    const dpr = window.devicePixelRatio || 1;
-    starsCanvas.width = window.innerWidth * dpr;
-    starsCanvas.height = window.innerHeight * dpr;
+    if (!starsCanvas || !starsCtx) return;
+    // Clamp DPR a bit to keep GPU cost predictable on very dense displays.
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    starsCanvas.width = Math.floor(window.innerWidth * dpr);
+    starsCanvas.height = Math.floor(window.innerHeight * dpr);
     starsCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
@@ -108,11 +123,12 @@ function stopStarsLoop() {
 
 function starsAnimLoop() {
     starsAnimId = requestAnimationFrame(starsAnimLoop);
+    if (!starsCtx || !starsCanvas) return;
 
     const now = performance.now();
     const elapsed = now - lastStarsTime;
 
-    // Throttle to ~30 fps — twinkling stars don't need 60
+    // Throttle to ~30 fps for performance
     if (elapsed < 33) return;
     lastStarsTime = now;
 
@@ -126,7 +142,7 @@ function starsAnimLoop() {
     // Draw stars
     for (let i = 0; i < starsData.length; i++) {
         const s = starsData[i];
-        // Sine-wave twinkle: opacity oscillates 0.3 → 1.0 (matches old CSS keyframes)
+        // Sine-wave twinkle: opacity oscillates 0.3 -> 1.0
         const twinkle = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(timeSec * (Math.PI * 2 / s.speed) + s.phase));
         const scale = 1 + 0.2 * (twinkle - 0.3) / 0.7;
 
@@ -134,7 +150,7 @@ function starsAnimLoop() {
         const py = s.y * h;
         const r = s.radius * scale;
 
-        // Glow (cheap radial fill — replaces expensive CSS box-shadow)
+        // Glow (radial fill to replace expensive CSS box-shadow)
         ctx.globalAlpha = starsOpacity * twinkle * s.glowAlpha;
         ctx.beginPath();
         ctx.arc(px, py, s.glowRadius * scale, 0, Math.PI * 2);
@@ -150,23 +166,32 @@ function starsAnimLoop() {
     }
 
     // Shooting stars
+    let activeShootingStars = 0;
     for (let i = 0; i < shootingStarsData.length; i++) {
         const ss = shootingStarsData[i];
         const cycleTime = (timeSec - ss.delay) % ss.period;
         if (cycleTime < 0) continue;
-        const visibleWindow = ss.period * 0.15;
+        const visibleWindow = ss.period * ss.visibleFraction;
         if (cycleTime > visibleWindow) continue;
 
         const progress = cycleTime / visibleWindow;
-        const opacity = progress < 0.33 ? progress / 0.33 : (1 - progress);
+        // Keep travel mostly constant while brightness handles the fade timing.
+        const travelProgress = progress;
+        // Slightly separate fade timing from travel so speed does not appear to drop at fade-out.
+        const fadeProgress = Math.min(1, progress * 1.03);
+        const opacity = Math.sin(fadeProgress * Math.PI);
         if (opacity <= 0) continue;
+        if (activeShootingStars >= 1) continue;
+        activeShootingStars++;
 
-        const px = ss.x * w + Math.cos(ss.angle) * 300 * progress;
-        const py = ss.y * h + Math.sin(ss.angle) * 173 * progress;
-        const tailX = px - Math.cos(ss.angle) * ss.length;
-        const tailY = py - Math.sin(ss.angle) * ss.length * 0.577;
+        const dx = Math.cos(ss.angle);
+        const dy = Math.sin(ss.angle);
+        const px = ss.x * w + dx * ss.travel * travelProgress;
+        const py = ss.y * h + dy * ss.travel * travelProgress;
+        const tailX = px - dx * ss.length;
+        const tailY = py - dy * ss.length;
 
-        ctx.globalAlpha = starsOpacity * Math.max(0, opacity);
+        ctx.globalAlpha = starsOpacity * Math.max(0, opacity) * ss.opacity;
         ctx.beginPath();
         ctx.moveTo(tailX, tailY);
         ctx.lineTo(px, py);
@@ -174,8 +199,15 @@ function starsAnimLoop() {
         grad.addColorStop(0, "rgba(255,255,255,0)");
         grad.addColorStop(1, "rgba(255,255,255,1)");
         ctx.strokeStyle = grad;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = ss.lineWidth;
         ctx.stroke();
+
+        // Subtle head sparkle to make meteors readable without becoming flashy.
+        ctx.globalAlpha = starsOpacity * opacity * ss.opacity * 0.55;
+        ctx.beginPath();
+        ctx.arc(px, py, 1, 0, Math.PI * 2);
+        ctx.fillStyle = "#fff";
+        ctx.fill();
     }
 
     ctx.globalAlpha = 1;

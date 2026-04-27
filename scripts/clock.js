@@ -5,8 +5,12 @@ let $clock = null;
 let $date = null;
 let $greeting = null;
 
+// e.g. 21.5 for 9:30 PM, null to disable
+const FIXED_TEST_DECIMAL_HOUR = null; // does not work
+
 // Get current time as decimal hours (0-24)
 function getDecimalHour() {
+    if (FIXED_TEST_DECIMAL_HOUR !== null) return FIXED_TEST_DECIMAL_HOUR;
     if (demoMode) return demoHour;
 
     const now = new Date();
