@@ -1,10 +1,10 @@
-@import url("hero.css");
-@import url("search.css");
-@import url("shortcuts.css");
-@import url("footer.css");
-@import url("undock.css");
-@import url("scheduler.css");
-@import url("focus.css");
+@import url("styles/hero.css");
+@import url("styles/search.css");
+@import url("styles/shortcuts.css");
+@import url("styles/footer.css");
+@import url("styles/undock.css");
+@import url("styles/scheduler.css");
+@import url("styles/focus.css");
 
 :root {
     --text-c: rgba(255, 255, 255, 0.9);
@@ -37,6 +37,11 @@ body {
     color: var(--text-c);
     min-height: 100vh;
     overflow: hidden;
+}
+
+a {
+    /*text-decoration: none;*/
+    color: inherit;
 }
 
 body.transitions-ready .hero_title,

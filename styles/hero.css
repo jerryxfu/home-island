@@ -33,7 +33,7 @@
 
 .hero_title {
     font-size: 5.55rem;
-    font-weight: 400;
+    font-weight: 350;
 }
 
 .hero_glowing-separator {
@@ -49,7 +49,7 @@
 }
 
 .hero_time {
-    font-weight: 450;
+    font-weight: 400;
     font-size: 2.55rem;
     margin-top: 0.5rem;
 }

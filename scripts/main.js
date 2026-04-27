@@ -19,7 +19,7 @@ function init() {
     initSearch();
     initKeyboardShortcuts();
     loadDemoModeSetting().catch(console.error);
-    initScheduler().catch(console.error);
+    // initScheduler().catch(console.error);
     loadShortcuts().catch(console.error);
     loadFocusModeSetting().catch(console.error);
     loadVersion();
