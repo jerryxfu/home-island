@@ -4,7 +4,10 @@ A beautiful, minimalist browser extension that transforms your new tab page into
 
 ## 🛍️ Installation links
 
-- Chrome: [https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpbkoggbhecmbhoep](https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpbkoggbhecmbhoep)
+-
+
+Chrome: [https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpbkoggbhecmbhoep](https://chromewebstore.google.com/detail/home-island/nodhcheaheohpnbdpbkoggbhecmbhoep)
+
 - Firefox: [https://addons.mozilla.org/firefox/addon/home-island/](https://addons.mozilla.org/firefox/addon/home-island/)
 - Safari: Available soon on the App Store (search for "Home Island")
 
@@ -17,6 +20,14 @@ A beautiful, minimalist browser extension that transforms your new tab page into
 - Settings menu and Focus mode buttons are in the bottom right corner of the page.
 
 ## Developer notes
+
+### Bundle extension without Safari support:
+
+```
+zip -r home-island.zip . --exclude "Home Island/*"
+```
+
+### Xcode project for Safari support:
 
 Run (once) the following command at the root of the project to generate the Safari version of the extension:
 
