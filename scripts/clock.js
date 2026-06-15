@@ -57,15 +57,15 @@ async function updateGreeting() {
     let greeting;
 
     if (hour >= 5 && hour < 7) {
-        greeting = "Early Bird";
+        greeting = "Early bird";
     } else if (hour >= 7 && hour < 12) {
-        greeting = "Good Morning";
+        greeting = "Good morning";
     } else if (hour >= 12 && hour < 17) {
-        greeting = "Good Afternoon";
-    } else if (hour >= 17 && hour < 21) {
-        greeting = "Good Evening";
+        greeting = "Good afternoon";
+    } else if (hour >= 17 && hour < 22) {
+        greeting = "Good evening";
     } else {
-        greeting = "Good Night";
+        greeting = "Good night";
     }
 
     const result = await storage.get(["userName"]);

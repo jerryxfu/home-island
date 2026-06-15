@@ -227,17 +227,23 @@ function renderShortcuts(shortcuts) {
 
 
 // Get current shortcuts from form
+// Note: we intentionally do NOT filter incomplete rows here, otherwise a
+// half-typed shortcut (name filled, URL still empty) gets dropped from
+// storage on every keystroke. Empty rows are filtered only on final commit.
 function getShortcutsFromForm() {
     return [...document.querySelectorAll(".shortcut-item")].map(item => ({
         name: item.querySelector(".shortcut-name").value.trim(),
         url: item.querySelector(".shortcut-url").value.trim(),
         favicon: item.querySelector(".shortcut-favicon").value.trim()
-    })).filter(s => s.name && s.url);
+    }));
 }
 
 // Save shortcuts
 async function saveShortcuts() {
-    await storage.set({shortcuts: JSON.stringify(getShortcutsFromForm())});
+    // Persist everything except fully-empty rows; partially-filled rows are
+    // kept so mid-typing edits survive.
+    const shortcuts = getShortcutsFromForm().filter(s => s.name || s.url);
+    await storage.set({shortcuts: JSON.stringify(shortcuts)});
     showStatus("Saved!");
 }
 
