@@ -21,7 +21,7 @@ A beautiful, minimalist browser extension that transforms your new tab page into
 ### Bundle extension without Safari support:
 
 ```
-zip -r extension.zip . --exclude "Home Island/*" --exclude ".git/*" --exclude "*.zip" --exclude "LICENSE" --exclude "*.DS_Store" --exclude "*/.DS_Store"
+zip -r extension.zip . --exclude "Home Island/*" --exclude ".git/*" --exclude "*.zip" --exclude "LICENSE" --exclude "*.DS_Store" --exclude "*/.DS_Store" --exclude ".idea/*"
 ```
 
 ### Xcode project for Safari support:
