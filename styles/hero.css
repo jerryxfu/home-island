@@ -22,6 +22,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    /* Stretch rather than shrink-to-fit, so .hero_title below can inherit a
+       real available width to measure the greeting against. Everything in here
+       is left-aligned, so this is visually identical. */
+    align-self: stretch;
     z-index: 1;
 }
 
@@ -31,9 +35,19 @@
     }
 }
 
+/* Font size here is the *maximum*. A long greeting ("Burning the midnight oil,
+   Alexandra") is scaled down to fit by fitGreeting() in scripts/clock.js, which
+   needs both of the following:
+     - align-self: stretch, so clientWidth reports the space available rather
+       than the width of the text itself
+     - white-space: nowrap, so the text overflows on one line and scrollWidth
+       reports what it actually needs, instead of quietly wrapping */
 .hero_title {
     font-size: 5.55rem;
     font-weight: 350;
+    align-self: stretch;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .hero_glowing-separator {

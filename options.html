@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="128x128" href="icons/icon128.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="icons/icon48.png">
+    <link rel="icon" type="image/png" sizes="24x24" href="icons/icon24.png">
     <script src="scripts/theme-init.js"></script>
     <link rel="stylesheet" href="styles/background.css">
     <link rel="stylesheet" href="styles/stars.css">
@@ -55,14 +58,14 @@
         </select>
     </div>
 
-    <div class="setting-group is-disabled" aria-disabled="true">
+    <div class="setting-group">
         <div class="toggle-row">
             <div>
-                <label for="schedulerToggle">Show Scheduler (disabled during summer)</label>
+                <label for="schedulerToggle">Show Scheduler</label>
                 <div class="toggle-description">Display scheduler on the right side</div>
             </div>
             <label class="toggle">
-                <input type="checkbox" id="schedulerToggle" disabled>
+                <input type="checkbox" id="schedulerToggle">
                 <span class="toggle-slider"></span>
             </label>
         </div>
@@ -70,7 +73,7 @@
 
     <div class="setting-group" id="schedulerIdGroup" style="display: none;">
         <label for="schedulerId">Scheduler ID</label>
-        <p class="description">Your unique scheduler identifier</p>
+        <p class="description">Your unique scheduler identifier. Required, the panel stays hidden until this is set.</p>
         <input type="text" id="schedulerId" placeholder="Enter your scheduler ID" maxlength="50">
     </div>
 
@@ -89,6 +92,8 @@
     <div class="status" id="status"></div>
 </div>
 
+<script src="scripts/storage.js"></script>
+<script src="scripts/constants.js"></script>
 <script src="scripts/theme.js"></script>
 <script src="scripts/stars.js"></script>
 <script src="scripts/options.js"></script>

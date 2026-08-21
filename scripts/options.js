@@ -7,39 +7,9 @@ let realtimeThemeIntervalId = null;
 const demoUpdatesPerSecond = 30;
 const demoHoursPerUpdate = 0.04;
 
-// Default shortcuts
-const DEFAULT_SHORTCUTS = [
-    {name: "Outlook", url: "https://outlook.live.com", favicon: ""},
-    {name: "OneDrive", url: "https://onedrive.live.com", favicon: "https://onedrive.live.com/_layouts/15/images/odbfavicon.ico"},
-    {name: "Word", url: "https://word.cloud.microsoft", favicon: ""},
-    {name: "Excel", url: "https://excel.cloud.microsoft", favicon: ""},
-    {name: "PowerPoint", url: "https://powerpoint.cloud.microsoft", favicon: ""},
-    {name: "Gmail", url: "https://mail.google.com", favicon: ""},
-    {name: "YouTube", url: "https://youtube.com", favicon: ""},
-    {name: "GitHub", url: "https://github.com", favicon: ""},
-    {name: "Spotify", url: "https://spotify.com", favicon: ""}
-];
-
-// Storage helper
-const storage = {
-    get: keys => new Promise(resolve => {
-        if (typeof chrome !== "undefined" && chrome.storage) chrome.storage.local.get(keys, resolve);
-        else if (typeof browser !== "undefined" && browser.storage) browser.storage.local.get(keys).then(resolve);
-        else {
-            const result = {};
-            keys.forEach(k => result[k] = localStorage.getItem(k));
-            resolve(result);
-        }
-    }),
-    set: data => new Promise(resolve => {
-        if (typeof chrome !== "undefined" && chrome.storage) chrome.storage.local.set(data, resolve);
-        else if (typeof browser !== "undefined" && browser.storage) browser.storage.local.set(data).then(resolve);
-        else {
-            Object.entries(data).forEach(([k, v]) => localStorage.setItem(k, String(v)));
-            resolve();
-        }
-    })
-};
+// storage and DEFAULT_SHORTCUTS come from storage.js / constants.js, loaded first
+// in options.html. They used to be redeclared here and had already drifted: the
+// localStorage fallback in this copy never coerced "true"/"false" back to booleans.
 
 // Load settings
 async function loadSettings() {
@@ -51,17 +21,16 @@ async function loadSettings() {
     if (result.demoMode === true || result.demoMode === "true") document.getElementById("demoToggle").checked = true;
     if (result.autoUndockDelay) document.getElementById("autoUndock").value = result.autoUndockDelay;
 
-    if (schedulerToggle.disabled) {
-        schedulerToggle.checked = false;
-        schedulerIdGroup.style.display = "none";
-    } else if (result.showScheduler === true || result.showScheduler === "true") {
+    if (result.showScheduler === true || result.showScheduler === "true") {
         schedulerToggle.checked = true;
         schedulerIdGroup.style.display = "block";
+    } else {
+        schedulerIdGroup.style.display = "none";
     }
 
     if (result.schedulerId) document.getElementById("schedulerId").value = result.schedulerId;
 
-    renderShortcuts(result.shortcuts ? JSON.parse(result.shortcuts) : DEFAULT_SHORTCUTS);
+    renderShortcutList(result.shortcuts ? JSON.parse(result.shortcuts) : DEFAULT_SHORTCUTS);
 }
 
 function getDecimalHourNow() {
@@ -150,7 +119,7 @@ function syncThemeLoopMode() {
 }
 
 // Render shortcuts list
-function renderShortcuts(shortcuts) {
+function renderShortcutList(shortcuts) {
     const container = document.getElementById("shortcutList");
     container.innerHTML = "";
 
@@ -251,7 +220,7 @@ async function saveShortcuts() {
 function addShortcut() {
     const shortcuts = getShortcutsFromForm();
     shortcuts.push({name: "", url: "", favicon: ""});
-    renderShortcuts(shortcuts);
+    renderShortcutList(shortcuts);
     document.querySelectorAll(".shortcut-name").item(shortcuts.length - 1)?.focus();
 }
 
@@ -259,7 +228,7 @@ function addShortcut() {
 async function removeShortcut(index) {
     const shortcuts = getShortcutsFromForm();
     shortcuts.splice(index, 1);
-    renderShortcuts(shortcuts);
+    renderShortcutList(shortcuts);
     await storage.set({shortcuts: JSON.stringify(shortcuts)});
     showStatus("Saved!");
 }
@@ -270,14 +239,14 @@ async function moveShortcut(index, direction) {
     const newIndex = index + direction;
     if (newIndex < 0 || newIndex >= shortcuts.length) return;
     [shortcuts[index], shortcuts[newIndex]] = [shortcuts[newIndex], shortcuts[index]];
-    renderShortcuts(shortcuts);
+    renderShortcutList(shortcuts);
     await storage.set({shortcuts: JSON.stringify(shortcuts)});
     showStatus("Saved!");
 }
 
 // Reset shortcuts to default
 async function resetShortcuts() {
-    renderShortcuts(DEFAULT_SHORTCUTS);
+    renderShortcutList(DEFAULT_SHORTCUTS);
     await storage.set({shortcuts: JSON.stringify(DEFAULT_SHORTCUTS)});
     showStatus("Reset to defaults!");
 }
@@ -287,8 +256,7 @@ async function saveSettings() {
     const userName = document.getElementById("userName").value.trim();
     const demoMode = document.getElementById("demoToggle").checked;
     const autoUndockDelay = document.getElementById("autoUndock").value;
-    const schedulerToggle = document.getElementById("schedulerToggle");
-    const showScheduler = schedulerToggle.disabled ? false : schedulerToggle.checked;
+    const showScheduler = document.getElementById("schedulerToggle").checked;
     const schedulerId = document.getElementById("schedulerId").value.trim();
 
     // Show/hide scheduler ID field based on toggle

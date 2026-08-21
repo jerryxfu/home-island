@@ -10,10 +10,10 @@ A beautiful, minimalist browser extension that transforms your new tab page into
 
 ## ✨ Features
 
-- **Dynamic Time-Based Background**: Color gradients that smoothly transition throughout the day with stars at night
-- **Personalized Greeting**: Contextual greeting that changes based on time of day and include your name
-- **Customizable Shortcuts**: Add your favorite websites as clickable icons
-- **Focus Mode**: A distraction-free mode that hides shortcuts and stars for a clean, serene experience
+- **Dynamic Time-Based Background**: Color gradients that smoothly transition throughout the day with stars at night.
+- **Personalized Greeting**: Contextual greeting that changes based on time of day and include your name.
+- **Customizable Shortcuts**: Add your favorite websites as clickable icons.
+- **Focus Mode**: A distraction-free mode that hides shortcuts and stars for a clean, serene experience.
 - Settings menu and Focus mode buttons are in the bottom right corner of the page.
 
 ## Developer notes
@@ -26,11 +26,14 @@ zip -r extension.zip . --exclude "Home Island/*" --exclude ".git/*" --exclude "*
 
 ### Xcode project for Safari support:
 
+**For project updates**, simply rebuild and run the project in Xcode, and the Safari extension will be updated automatically. Do not rerun the command below.
+
+#### Adding Safari support to the project:
+
 Run (once) the following command at the root of the project to generate the Safari version of the extension:
 
 ```
 xcrun safari-web-extension-converter .
 ```
 
-For project updates, simply rebuild and run the project in Xcode, and the Safari extension will be updated automatically.
-Do not rerun the above command.
+

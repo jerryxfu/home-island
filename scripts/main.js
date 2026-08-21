@@ -13,13 +13,16 @@ function init() {
     updateClock();
     setInterval(updateClock, 1000);
 
-    updateGreeting().catch(console.error);
+    // Render a greeting straight away, then re-render once the name arrives.
+    initGreetingFit();
+    updateGreeting();
     setInterval(updateGreeting, 60000);
+    loadUserName().catch(console.error);
 
     initSearch();
     initKeyboardShortcuts();
     loadDemoModeSetting().catch(console.error);
-    // initScheduler().catch(console.error);
+    initScheduler().catch(console.error);
     loadShortcuts().catch(console.error);
     loadFocusModeSetting().catch(console.error);
     loadVersion();
